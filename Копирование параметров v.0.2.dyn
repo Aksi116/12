@@ -1,0 +1,827 @@
+<Workspace Version="1.3.4.6666" X="303.22495300461" Y="-12.5478945492463" zoom="0.63192221023233" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="624e7648-e244-4c4d-8c95-96381cd78465" type="PythonNodeModels.PythonNode" nickname="Python Script" x="153.316239912074" y="288.078645402092" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+#Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+el1 = IN[0]
+el2 = IN[1]
+#Назначьте вывод переменной OUT.
+OUT = [el1, el2]</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="23b65b3a-dad1-4a4e-bbca-b8bf089ee423" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-278" y="264.638556945308" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;1. Оборудование&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="3ae8a78d-e967-4819-b660-b625358bf090" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-280" y="349.638556945308" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;4. Воздухораспределители&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="99b02a9c-025f-43ca-a729-993dbf4ee161" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-281" y="506" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;2. Арматура воздуховодов&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="7d78048b-6b60-4e98-982a-85a960113d27" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-281" y="588" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;5.  Соединительные детали воздуховодов&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="f6b27b60-0578-4979-940e-92980204c97b" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-275.675264838033" y="746.201635286063" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;3. Воздуховоды&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="aabc0a5b-c19d-4e2c-bb44-da9c101e965b" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-277.675264838033" y="834.201635286063" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;6. Изоляция воздуховодов&quot;;" ShouldFocus="false" />
+    <PythonNodeModels.PythonNode guid="c94a1e4c-6892-4876-94d9-6cf9b87e438e" type="PythonNodeModels.PythonNode" nickname="Python Script" x="152.316239912074" y="529.440088456784" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+#Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+el1 = IN[0]
+el2 = IN[1]
+#Назначьте вывод переменной OUT.
+OUT = [el1, el2]</Script>
+    </PythonNodeModels.PythonNode>
+    <PythonNodeModels.PythonNode guid="4519bafb-8a25-4706-b06a-8f1f3ae652c5" type="PythonNodeModels.PythonNode" nickname="Python Script" x="160.64097507404" y="786.641723742847" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+#Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+el1 = IN[0]
+el2 = IN[1]
+#Назначьте вывод переменной OUT.
+OUT = [el1, el2]</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="2f1ff8f5-f59f-4de7-8ebb-a5abc6aa6a9e" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Коэф запаса" x="848.054256983479" y="1187.27747957899" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="1.1;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="adfcb4fa-2cb9-4374-be95-86655132334e" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Миним диаметр стояка" x="849.306994791745" y="1100.86661749279" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="25;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="b90bf6d6-e73e-4a00-ad21-2348f1979d05" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Миним высота стояка" x="956.882881393331" y="1184.59022630194" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="200;" ShouldFocus="false" />
+    <PythonNodeModels.PythonNode guid="af17d718-d51a-4f8f-808e-db353e608347" type="PythonNodeModels.PythonNode" nickname="Python Script" x="1406.31708529647" y="895.601638880495" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="5">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+      <PortInfo index="4" default="False" />
+      <Script># Загрузить стандартную библиотеку Python и библиотеку DesignScript
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+from System.Collections.Generic import List
+import math
+#from threading import Thread
+import re
+import time
+#----------------------------------------------
+
+#line___________________________________________________________
+pipe_f=ElementCategoryFilter(BuiltInCategory.OST_DuctCurves)
+pipeIsole_f=ElementCategoryFilter(BuiltInCategory.OST_DuctInsulations)
+flexPipe_f=ElementCategoryFilter(BuiltInCategory.OST_FlexDuctCurves)
+#-----------------------------------------------------------------
+
+#massive_____________________________________________________________________
+line_filter_mas=[]
+line_filter_mas.append(pipe_f)
+line_filter_mas.append(pipeIsole_f)
+line_filter_mas.append(flexPipe_f)
+# Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+ADSK_gr=UnwrapElement(IN[1])
+koefZap=UnwrapElement(IN[2])
+minD=UnwrapElement(IN[3])
+minH=UnwrapElement(IN[4])
+# Разместите код под этой строкой
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+
+
+k=0
+#_Получение уровней________________________________________________
+levelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)
+collector = FilteredElementCollector(doc)
+mas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()
+levelmas=[]
+#_________________________________________________________________
+
+def cikleLevel(mas):
+	levelmas.Clear()
+	for level1 in mas:
+		if -4000/304.8&lt;level1.GetParameters('Фасад')[0].AsDouble()&lt;-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()&gt;=0:
+			levelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])
+	return levelmas
+#_________________________________________________________________
+def groupMas(grupNameMas,element):
+	try:
+		if str(element.Category.Name)[0:3]!='Мат':
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])
+		else:
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])
+	except:
+		bag.append(["ADSK_Группирование",element])			
+	return bag
+def adskCount(element):
+	try:
+		element.GetParameters('ADSK_Количество')[0].Set(element.GetParameters('Длина')[0].AsDouble()*304.8/1000*koefZap)
+	except:
+		bag.append(["ADSK_Количество",element])			
+	return bag
+def lsrSystemType(element):
+	try:
+		element.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Тип системы')[0].AsValueString())
+	except:
+		bag.append(["LSR_Тип системы",element])			
+	return bag	
+def lsrSystemName(element):
+	try:
+		element.GetParameters('LSR_Имя системы')[0].Set(element.GetParameters('Имя системы')[0].AsString())
+	except:
+		bag.append(["LSR_Имя системы",element])			
+	return bag		
+def DirectionType(element,d,l):
+	try:
+		element.GetParameters('LSR_Тип разводки')[0].Set('Разводка')
+		
+		if float(re.sub('[^0-9]', '', (element.LookupParameter('Размер').AsString())))&gt;=d: 
+			X1_2=element.Location.Curve.GetEndPoint(0).X
+			Y1_2=element.Location.Curve.GetEndPoint(0).Y
+			Z1_2=element.Location.Curve.GetEndPoint(0).Z
+			X2_2=element.Location.Curve.GetEndPoint(1).X
+			Y2_2=element.Location.Curve.GetEndPoint(1).Y
+			Z2_2=element.Location.Curve.GetEndPoint(1).Z
+			if abs(abs(X1_2)-abs(X2_2))&lt;0.5 and abs(abs(Y1_2)-abs(Y2_2))&lt;0.5 and abs(Z1_2-Z2_2)&gt;l/304.8 :
+				element.GetParameters('LSR_Тип разводки')[0].Set('Стояк')
+	except:
+		bag.append(["LSR_Тип разводки",element])			
+	return bag	
+bag1=[]	
+def pipeName(element):
+	i=element
+	test=[]
+	try:
+		if str(element.Category.Name)[0:3]=='Мат':
+			element.LookupParameter('ADSK_Наименование').Set(str(element.Name)+' Толщиной '+str(int(element.LookupParameter('Толщина изоляции').AsDouble()*304.8))+'мм для трубы '+str(element.LookupParameter('Размер воздуховода').AsString()))
+					
+		if str(element.Category.Name)[0:3]=='Гиб':	
+			element.LookupParameter('ADSK_Наименование').Set(str(element.FlexDuctType.LookupParameter('Комментарии к типоразмеру').AsString())+' ⌀'+str(element.LookupParameter('Диаметр').AsValueString()))
+	
+	except:
+		bag.append(["ADSK_Наименование",element])	
+			
+	
+	if element.Category.Name[0:3]=='Воз':
+		text0='Воздуховод из тонколистовой оцинкованной стали'#, Ø 200 толщиной S=0,5мм
+		try:
+			#2
+			if i.LookupParameter('Имя системы').AsString()[0:2]=='ДВ':
+				text='толщиной S='+t+'мм'
+				try:
+					d='Ø '+i.LookupParameter('Диаметр').AsValueString()
+				except:
+					d=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()
+					
+				i.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)
+			elif i.Name[0:1]=='С' and i.LookupParameter('Имя системы').AsString()[0:2]!='ДВ':
+				try:
+					d=i.LookupParameter('Диаметр').AsValueString()
+				
+					if int(d)&lt;=250:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True' :
+						text='толщиной S=0,5мм'
+					if 300&lt;=int(d)&lt;=1000:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True':
+						text='толщиной S=0,7мм'
+					if 1250&lt;=int(d)&lt;=2000:
+						text='толщиной S=0,9'		
+				except:
+					if int(i.LookupParameter('Ширина').AsValueString())&lt;=250 and int(i.LookupParameter('Высота').AsValueString())&lt;=250 :
+						text='толщиной S=0,5мм'
+					if 300&lt;=int(i.LookupParameter('Ширина').AsValueString())&lt;=1000 or 300&lt;=int(i.LookupParameter('Высота').AsValueString())&lt;=1000 :
+						text='толщиной S=0,7мм'
+					if 1250&lt;=int(i.LookupParameter('Ширина').AsValueString())&lt;=2000 or 1250&lt;=int(i.LookupParameter('Высота').AsValueString())&lt;=2000:
+						text='толщиной S=0,9мм'	
+				try:
+					d='Ø '+i.LookupParameter('Диаметр').AsValueString()
+				except:
+					d=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()
+					
+				i.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)
+	
+			else: 
+	
+				try:
+					d=i.LookupParameter('Диаметр').AsValueString()
+				
+					if int(d)&lt;=250:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True' :
+						text='толщиной S=0,5мм'
+					if 300&lt;=int(d)&lt;=1000:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True':
+						text='толщиной S=0,7мм'
+					if 1250&lt;=int(d)&lt;=2000:
+						text='толщиной S=0,9'		
+				except:
+					if int(i.LookupParameter('Ширина').AsValueString())&lt;=250 and int(i.LookupParameter('Высота').AsValueString())&lt;=250 :
+						text='толщиной S=0,5мм'
+					if 300&lt;=int(i.LookupParameter('Ширина').AsValueString())&lt;=1000 or 300&lt;=int(i.LookupParameter('Высота').AsValueString())&lt;=1000 :
+						text='толщиной S=0,7мм'
+					if 1250&lt;=int(i.LookupParameter('Ширина').AsValueString())&lt;=2000 or 1250&lt;=int(i.LookupParameter('Высота').AsValueString())&lt;=2000:
+						text='толщиной S=0,9мм'	
+				try:
+					d='Ø '+i.LookupParameter('Диаметр').AsValueString()
+				except:
+					d=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()
+					
+				i.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)
+		except:
+			bag1.append(i)	
+		
+	return bag1
+def pipeMarka(element):
+	try:
+					
+		if str(element.Category.Name)[0:3]=='Воз' and str(element.PipeType.LookupParameter('ADSK_Марка').AsString())=="None":
+			element.DuctType.LookupParameter('ADSK_Марка').Set(str(element.LookupParameter('Материал').AsValueString()))
+		if str(element.Category.Name)[0:3]=='Гиб':	
+			element.FlexPipeType.LookupParameter('ADSK_Марка').Set(str(element.FlexDuctType.LookupParameter('Комментарии к типоразмеру').AsString()))
+	except:
+		bag.append(["ADSK_Марка",element])			
+	return bag		
+	
+
+	
+count=0
+test=[]
+levelmas2=cikleLevel(mas)
+levelCount=len(levelmas2)
+
+bag=[]
+levelMas0=[]
+linemas01=[]
+linemas0=[]
+for filter in line_filter_mas:
+	collector = FilteredElementCollector(doc)
+	lineMas0=collector.WherePasses(filter).WhereElementIsNotElementType().ToElements()
+	
+	for line in lineMas0:
+		pipeCurve = line.Location.Curve; point0=pipeCurve.GetEndPoint(0);point1=pipeCurve.GetEndPoint(1) 
+		point0x=point0.X; point0y=point0.Y; point0z=point0.Z
+		point1x=point1.X; point1y=point1.Y;	point1z=point1.Z
+		dx=point0x-point1x;	dy=point0y-point1y;	dz=(point0z+point1z)/2
+		
+		zpoint=dz
+		linemas01.append([line,zpoint])
+TransactionManager.Instance.EnsureInTransaction(doc)
+count=0
+test=[]
+levelCount=len(cikleLevel(mas))
+levelmas2=cikleLevel(mas)
+
+
+sorted_list = sorted(levelmas2, key=lambda x: ( x[1]))
+test1=[]
+for i in linemas01:
+	
+	count=0
+	groupMas(ADSK_gr,i[0])
+	adskCount(i[0])
+	lsrSystemType(i[0])
+	lsrSystemName(i[0])
+	DirectionType(i[0],minD,minH)
+	test1.append(pipeName(i[0]))
+	pipeMarka(i[0])
+	
+	try:	
+		while count&lt;(levelCount-1):
+			k=sorted_list[count][1]
+			k1=sorted_list[count+1][1]
+			if i[1]&lt;0 :
+				try:
+					i[0].GetParameters('Базовый уровень')[0].Set(sorted_list[0][0].Id)
+				except:
+					bag.append(["ADSK_Этаж",i[0]])
+				i[0].GetParameters('ADSK_Этаж')[0].Set('-01')
+			elif k&lt;i[1]&lt;k1 :
+				try:
+					i[0].GetParameters('Базовый уровень')[0].Set(sorted_list[count][0].Id)
+				except:
+					bag.append(["ADSK_Этаж",i[0]])
+				i[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))
+			elif i[1]&gt;sorted_list[len(sorted_list)-1][1]:
+				try:
+					i[0].GetParameters('Базовый уровень')[0].Set(sorted_list[len(sorted_list)-1][0].Id)
+				except:
+					bag.append(["ADSK_Этаж",i[0]])	
+				i[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')
+			count=count+1
+	except:
+		bag.append(["ADSK_Этаж",i[0]])		
+TransactionManager.Instance.ForceCloseTransaction()
+
+
+t=bag1
+t1=dir(t)
+# Назначьте вывод переменной OUT.
+OUT = test1</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Input.BoolSelector guid="69d972f4-d04d-4ea7-af0b-485ba8b1570e" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="869.794222500777" y="812.131404687368" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Watch guid="7050b5ee-6b48-495e-90c5-bf52f0efe8e8" type="CoreNodeModels.Watch" nickname="Watch" x="1660.35319942862" y="882.467803429656" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <PythonNodeModels.PythonNode guid="b2a4de27-9b3f-4ce6-bca8-e23e926bfc89" type="PythonNodeModels.PythonNode" nickname="Python Script" x="643.998871087068" y="291.521787928061" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script># Загрузить стандартную библиотеку Python и библиотеку DesignScript
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+from System.Collections.Generic import List
+import math
+#from threading import Thread
+import time
+#----------------------------------------------
+#line___________________________________________________________
+
+mechlEquip_f=ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)
+vozduh_f=ElementCategoryFilter(BuiltInCategory.OST_DuctTerminal)
+
+#massive_____________________________________________________________________
+line_filter_mas=[]
+line_filter_mas.append(mechlEquip_f)
+line_filter_mas.append(vozduh_f)
+
+
+# Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+#Elem = UnwrapElement(IN[0])
+ADSK_gr=UnwrapElement(IN[1])
+# Разместите код под этой строкой
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+bag=[]
+
+
+k=0
+levcountbild=1
+levelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)
+collector = FilteredElementCollector(doc)
+mas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()
+levelmas=[]
+znach=[]
+
+def cikleLevel(mas):
+	levelmas.Clear()
+	for level1 in mas:
+		if -4000/304.8&lt;level1.GetParameters('Фасад')[0].AsDouble()&lt;-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()&gt;=0:
+			levelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])
+	return levelmas
+def groupMas(grupNameMas,element):
+	try:
+		if str(element.Category.Name)[0:3]!='Сан':
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])
+		else:
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])
+	except:
+		bag.append(["ADSK_Группирование",element])			
+	return bag
+def adskCount(element):
+	try:
+		element.GetParameters('ADSK_Количество')[0].Set(1)
+	except:
+		bag.append(["ADSK_Количество",element])			
+	return bag
+def lsrSystemType(element):
+	try:
+		element.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Классификация систем')[0].AsString())
+	except:
+		bag.append(["LSR_Тип системы",element])			
+	return bag	
+def lsrSystemName(element):
+	try:
+		element.GetParameters('LSR_Имя системы')[0].Set(str(element.GetParameters('Имя системы')[0].AsString())[0:2])
+	except:
+		bag.append(["LSR_Имя системы",element])			
+	return bag	
+
+def edinIzmer(element):
+	try:
+		element.Symbol.GetParameters('ADSK_Единица измерения')[0].Set('шт.')
+	except:
+		bag.append(["ADSK_Единица измерения",element])			
+	return bag		
+TransactionManager.Instance.EnsureInTransaction(doc)
+count=0
+test=[]
+levelCount=len(cikleLevel(mas))
+levelmas2=cikleLevel(mas)
+linemas0=[]
+sorted_list = sorted(levelmas2, key=lambda x: ( x[1]))
+for filter in line_filter_mas:
+	collector = FilteredElementCollector(doc)
+	for line in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():
+		zpoint=line.Location.Point.Z
+		linemas0.append([line,zpoint])
+		i=line
+		if filter==vozduh_f:
+			try:
+				oldName=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()
+				size=i.LookupParameter('Размер').AsString().split("-")
+				newName=i.LookupParameter('ADSK_Наименование').Set(oldName+'  '+size[0])
+				oldNameMark=i.Symbol.LookupParameter('Имя типа').AsString()
+				i.Symbol.LookupParameter('ADSK_Марка').Set(oldNameMark+' '+size[0])
+			except:
+				try:
+					newName=i.LookupParameter('ADSK_Наименование').Set(i.Symbol.LookupParameter('Имя типа').AsString())
+				except:
+					bag.append(i)
+		
+bag=[]	
+for i in linemas0:
+	count=0
+	groupMas(ADSK_gr,i[0])
+	adskCount(i[0])
+	lsrSystemType(i[0])
+	lsrSystemName(i[0])
+	while count&lt;(levelCount-1):
+		
+		k=sorted_list[count][1]
+		k1=sorted_list[count+1][1]
+		
+		
+		#
+		if i[1]+200/304.8&lt;0 :
+			try:
+				i[0].LookupParameter('Отметка от уровня').Set(i[1]-sorted_list[0][1])
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[0][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('-01')
+			except:
+				bag.append(i[0])
+		
+		elif k&lt;i[1]+200/304.8&lt;k1:
+			try:
+				i[0].LookupParameter('Отметка от уровня').Set(i[1]-k)
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[count][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))
+			except:
+				bag.append(i[0])
+		
+		elif i[1]&gt;sorted_list[len(sorted_list)-1][1]:
+			try:
+				i[0].LookupParameter('Отметка от уровня').Set(i[1]-sorted_list[len(sorted_list)-1][1])
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[len(sorted_list)-1][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')
+			except:
+				bag.append(i[0])
+			
+		
+			
+			
+		count=count+1
+			
+
+
+
+
+
+		
+		
+			
+t=linemas0#bag#linemas0[0][0].GetParameters('Отметка от уровня')[0].Set(20000)
+TransactionManager.Instance.ForceCloseTransaction()
+
+
+
+t1=dir(t)
+# Назначьте вывод переменной OUT.
+OUT = t,t1</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Input.BoolSelector guid="a95e13e6-387a-45f6-945e-5038740dffed" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="373.89189628679" y="177.926090623856" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Watch guid="be1e3651-280a-4764-a31a-f66728e650d4" type="CoreNodeModels.Watch" nickname="Watch" x="997.899509654258" y="-124.295915101414" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <PythonNodeModels.PythonNode guid="d1bcd385-b5c4-405d-8263-817ecc683b30" type="PythonNodeModels.PythonNode" nickname="Python Script" x="705.906859813575" y="601.187931438572" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script># Загрузить стандартную библиотеку Python и библиотеку DesignScript
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+from System.Collections.Generic import List
+import math
+#from threading import Thread
+import time
+#----------------------------------------------
+#line___________________________________________________________
+pipe_filter=ElementCategoryFilter(BuiltInCategory.OST_PipeCurves)
+duct_filter=ElementCategoryFilter(BuiltInCategory.OST_DuctCurves)
+
+#-----------------------------------------------------------------
+#OV_VK___________________________________________________________________
+ductFitting_f=ElementCategoryFilter(BuiltInCategory.OST_DuctFitting)
+pipeFitting_f=ElementCategoryFilter(BuiltInCategory.OST_PipeFitting)
+
+mechanicalEquipment_f=ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)
+pipeaccs_f=ElementCategoryFilter(BuiltInCategory.OST_PipeAccessory)
+ductaccs_f=ElementCategoryFilter(BuiltInCategory.OST_DuctAccessory)
+
+#massive_____________________________________________________________________
+line_filter_mas=[]
+line_filter_mas.append(ductFitting_f)
+line_filter_mas.append(ductaccs_f)
+
+
+
+#line_filter_mas.append(cableTray_filter)
+
+
+
+# Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+ADSK_gr=UnwrapElement(IN[1])
+#Elem = UnwrapElement(IN[0])
+
+# Разместите код под этой строкой
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+test=[]
+
+
+k=0
+levcountbild=1
+levelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)
+collector = FilteredElementCollector(doc)
+mas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()
+levelmas=[]
+znach=[]
+bag=[]
+def cikleLevel(mas):
+	levelmas.Clear()
+	for level1 in mas:
+		if -4000/304.8&lt;level1.GetParameters('Фасад')[0].AsDouble()&lt;-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()&gt;=0:
+			levelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])
+	return levelmas
+def groupMas(grupNameMas,element):
+	try:
+		if str(element.Category.Name)[0:3]!='Сое':
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])
+		else:
+			element.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])
+	except:
+		bag.append(["ADSK_Группирование",element])			
+	return bag
+def adskCount(element):
+	try:
+		element.GetParameters('ADSK_Количество')[0].Set(1)
+	except:
+		bag.append(["ADSK_Количество",element])			
+	return bag
+def lsrSystemType(element):
+	try:
+		element.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Тип системы')[0].AsValueString())
+	except:
+		bag.append(["LSR_Тип системы",element])			
+	return bag	
+def lsrSystemName(element):
+	try:
+		element.GetParameters('LSR_Имя системы')[0].Set(str(element.GetParameters('Имя системы')[0].AsString())[0:2])
+	except:
+		bag.append(["LSR_Имя системы",element])			
+	return bag	
+
+def edinIzmer(element):
+	try:
+		element.Symbol.GetParameters('ADSK_Единица измерения')[0].Set('шт.')
+	except:
+		bag.append(["ADSK_Единица измерения",element])			
+	return bag		
+def adskNameR(element):		
+	i=element
+	n=(i.LookupParameter('Размер').AsString()).split("-")
+	rsplitMas=[]	
+	ssplitMas=[]
+		
+	try:
+		for j in i.MEPModel.ConnectorManager.Connectors:
+			for j1 in j.AllRefs:
+				
+				#test.append([i.LookupParameter('Размер').AsString().split("-")[0],j1.Owner.LookupParameter('Размер').AsString().split("-")[0]])
+				
+				if i.LookupParameter('Размер').AsString().split("-")[0]!=j1.Owner.LookupParameter('Размер').AsString().split("-")[0]:
+					rsplitMas.append(j1.Owner.LookupParameter('Размер').AsString().split("-"))
+					
+						
+		if 	len(rsplitMas)&gt;0:
+			#test.append(i)	
+			if rsplitMas[0][0][0:1]=='⌀':
+				d2=	rsplitMas[0][0]
+				i.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+d2)
+			else:
+				d2=	rsplitMas[0][0]
+				i.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+d2)		
+		elif len(rsplitMas[0])==0:
+			if rsplitMas[0][0][0:1]=='⌀':
+				
+				i.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+n[0])
+			else:
+				
+				i.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+n[0])	
+	except:
+		test.append(i)
+	if len(i.LookupParameter('ADSK_Наименование').AsString())==0 and i.LookupParameter('Размер').AsString()[0:1]=='⌀':
+		i.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+n[0])
+	elif len(i.LookupParameter('ADSK_Наименование').AsString())==0 and i.LookupParameter('Размер').AsString()[0:1]!='⌀':
+		i.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+n[0])	
+				
+	return test	
+TransactionManager.Instance.EnsureInTransaction(doc)
+count=0
+
+levelCount=len(cikleLevel(mas))
+levelmas2=cikleLevel(mas)
+linemas0=[]
+test=[]
+sorted_list = sorted(levelmas2, key=lambda x: ( x[1]))
+
+m = []
+
+
+
+for filter in line_filter_mas:
+
+	collector = FilteredElementCollector(doc)
+	
+	for line in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():
+		zpoint=line.Location.Point.Z
+		linemas0.append([line,zpoint])
+		i=line
+		if 	filter==ductaccs_f:
+			try:
+				oldName=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()
+				size=i.LookupParameter('Размер').AsString().split("-")
+				newName=i.LookupParameter('ADSK_Наименование').Set(oldName+'  '+size[0])
+				"""
+				oldNameMark=i.Symbol.LookupParameter('Имя типа').AsString()
+				i.Symbol.LookupParameter('ADSK_Марка').Set(oldNameMark+' '+size[0])
+				"""
+			except:
+				bag.append(["Ошибки в аксесуарах",i])
+			try:
+				i.LookupParameter('ADSK_Количество').Set(i.LookupParameter('Число').AsDouble()*304.8)	
+			except:
+				bag.append(["Ошибки в аксесуарах",i])
+		if 	filter==ductFitting_f:
+			
+			name2=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()	
+			
+			d=i.LookupParameter('Размер').AsString()
+			try:
+				if name2[0:5]=='Отвод':
+					
+					n=(i.LookupParameter('Размер').AsString()).split("-")
+							
+					
+					e=i.LookupParameter('MC Fitting Angle').AsValueString()
+					test.append(i)		
+					i.LookupParameter('ADSK_Наименование').Set('Отвод'+'-'+e+' '+str(n[0]))
+					
+				elif name2[0:5]=='Перех':
+					n=i.LookupParameter('Размер').AsString()
+					i.LookupParameter('ADSK_Наименование').Set('Переход'+' '+n)
+				elif name2[0:5]=='Заглу':
+					n=i.LookupParameter('Размер').AsString()
+					i.LookupParameter('ADSK_Наименование').Set('Заглушка'+' '+n)			
+				elif name2[0:5]=='Тройн':
+					n=i.LookupParameter('Размер').AsString()	
+					i.LookupParameter('ADSK_Наименование').Set('Тройник'+' '+n)	
+				elif name2[0:5]=='Врезк':
+					adskNameR(i)
+			except:
+				pass
+		
+for i in linemas0:
+	count=0
+	groupMas(ADSK_gr,i[0])
+	adskCount(i[0])
+	lsrSystemType(i[0])
+	lsrSystemName(i[0])
+	edinIzmer(i[0])
+	while count&lt;(levelCount-1):
+		
+		k=sorted_list[count][1]
+		k1=sorted_list[count+1][1]
+		
+		
+		#
+		if i[1]&lt;0 :
+			try:
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[0][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('-01')
+				
+			except:
+				pass
+		elif k&lt;i[1]&lt;k1:
+		
+			try:
+				
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[count][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))
+				
+			except:
+				pass	
+		elif i[1]&gt;sorted_list[len(sorted_list)-1][1]:
+			try:
+				i[0].GetParameters('Уровень')[1].Set(sorted_list[len(sorted_list)-1][0].Id)
+				i[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')
+			except:
+				pass
+			
+		count=count+1
+
+
+
+
+
+
+TransactionManager.Instance.ForceCloseTransaction()
+
+
+t=bag#levelmas2[len(levelmas2)-1][1]
+t1=dir(t)
+# Назначьте вывод переменной OUT.
+OUT = test #t,t1</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Input.BoolSelector guid="c3f2d89f-b7d7-4ddf-81c2-a4cd6220db0d" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="406.452301710639" y="528.425044282333" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Watch guid="45d0f552-55e6-4504-abf5-bdd425c1bca5" type="CoreNodeModels.Watch" nickname="Watch" x="1105.56030427313" y="570.712509025426" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="624e7648-e244-4c4d-8c95-96381cd78465" start_index="0" end="b2a4de27-9b3f-4ce6-bca8-e23e926bfc89" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="23b65b3a-dad1-4a4e-bbca-b8bf089ee423" start_index="0" end="624e7648-e244-4c4d-8c95-96381cd78465" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3ae8a78d-e967-4819-b660-b625358bf090" start_index="0" end="624e7648-e244-4c4d-8c95-96381cd78465" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="99b02a9c-025f-43ca-a729-993dbf4ee161" start_index="0" end="c94a1e4c-6892-4876-94d9-6cf9b87e438e" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="7d78048b-6b60-4e98-982a-85a960113d27" start_index="0" end="c94a1e4c-6892-4876-94d9-6cf9b87e438e" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="f6b27b60-0578-4979-940e-92980204c97b" start_index="0" end="4519bafb-8a25-4706-b06a-8f1f3ae652c5" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="aabc0a5b-c19d-4e2c-bb44-da9c101e965b" start_index="0" end="4519bafb-8a25-4706-b06a-8f1f3ae652c5" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="c94a1e4c-6892-4876-94d9-6cf9b87e438e" start_index="0" end="d1bcd385-b5c4-405d-8263-817ecc683b30" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4519bafb-8a25-4706-b06a-8f1f3ae652c5" start_index="0" end="af17d718-d51a-4f8f-808e-db353e608347" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="2f1ff8f5-f59f-4de7-8ebb-a5abc6aa6a9e" start_index="0" end="af17d718-d51a-4f8f-808e-db353e608347" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="adfcb4fa-2cb9-4374-be95-86655132334e" start_index="0" end="af17d718-d51a-4f8f-808e-db353e608347" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b90bf6d6-e73e-4a00-ad21-2348f1979d05" start_index="0" end="af17d718-d51a-4f8f-808e-db353e608347" end_index="4" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="af17d718-d51a-4f8f-808e-db353e608347" start_index="0" end="7050b5ee-6b48-495e-90c5-bf52f0efe8e8" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="69d972f4-d04d-4ea7-af0b-485ba8b1570e" start_index="0" end="af17d718-d51a-4f8f-808e-db353e608347" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b2a4de27-9b3f-4ce6-bca8-e23e926bfc89" start_index="0" end="be1e3651-280a-4764-a31a-f66728e650d4" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a95e13e6-387a-45f6-945e-5038740dffed" start_index="0" end="b2a4de27-9b3f-4ce6-bca8-e23e926bfc89" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d1bcd385-b5c4-405d-8263-817ecc683b30" start_index="0" end="45d0f552-55e6-4504-abf5-bdd425c1bca5" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="c3f2d89f-b7d7-4ddf-81c2-a4cd6220db0d" start_index="0" end="d1bcd385-b5c4-405d-8263-817ecc683b30" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="fc0a5973-318d-47ee-ae67-80360cfc2de6" annotationText="Входные данные ВК" left="838.054256983479" top="1054.86661749279" width="283.828624409852" height="225.4108620862" fontSize="30" InitialTop="1100.86661749279" InitialHeight="209.410862086198" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="2f1ff8f5-f59f-4de7-8ebb-a5abc6aa6a9e" />
+      <Models ModelGuid="adfcb4fa-2cb9-4374-be95-86655132334e" />
+      <Models ModelGuid="b90bf6d6-e73e-4a00-ad21-2348f1979d05" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="94faefc3-9ce8-48f1-bf85-a80128d9a3b8" annotationText="1" left="-290" top="218.638556945308" width="577.316239912074" height="224" fontSize="30" InitialTop="264.638556945308" InitialHeight="208" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="624e7648-e244-4c4d-8c95-96381cd78465" />
+      <Models ModelGuid="23b65b3a-dad1-4a4e-bbca-b8bf089ee423" />
+      <Models ModelGuid="3ae8a78d-e967-4819-b660-b625358bf090" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="89e4a462-31c8-4abe-8edc-ac71639f43a5" annotationText="2" left="-291" top="460" width="577.316239912074" height="221" fontSize="30" InitialTop="506" InitialHeight="205" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="99b02a9c-025f-43ca-a729-993dbf4ee161" />
+      <Models ModelGuid="7d78048b-6b60-4e98-982a-85a960113d27" />
+      <Models ModelGuid="c94a1e4c-6892-4876-94d9-6cf9b87e438e" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="37b11474-807c-4e24-8087-8b9e80dc4044" annotationText="3" left="-287.675264838033" top="700.201635286063" width="582.316239912073" height="227" fontSize="30" InitialTop="746.201635286063" InitialHeight="211" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="f6b27b60-0578-4979-940e-92980204c97b" />
+      <Models ModelGuid="aabc0a5b-c19d-4e2c-bb44-da9c101e965b" />
+      <Models ModelGuid="4519bafb-8a25-4706-b06a-8f1f3ae652c5" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Фоновый просмотр" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

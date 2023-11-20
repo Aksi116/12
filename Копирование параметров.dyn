@@ -1,0 +1,129 @@
+<Workspace Version="1.3.4.6666" X="172.166388908629" Y="234.41622347194" zoom="1.25756329557932" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="71a0cc02-5e55-4901-97f4-e89402cf038f" type="PythonNodeModels.PythonNode" nickname="Python Script" x="638.47257072129" y="223.724041917724" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script># Загрузить стандартную библиотеку Python и библиотеку DesignScript
+
+import sys
+import clr
+
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+#----------------------------------------------
+
+# Введенные в этом узле данные сохраняется в виде списка в переменных IN.
+dataEnteringNode = IN
+cat = UnwrapElement(IN[0])
+
+
+# Разместите код под этой строкой
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+
+
+koef=0.3048*0.3048 # перевод кв. футы в кв. м.
+kf3 = 0.3048*0.3048*0.3048 # перевод куб. футы в куб. м.
+kf = 0.3048 # перевод футы в м.
+el = FilteredElementCollector(doc).OfCategoryId(cat.Id).WhereElementIsNotElementType().ToElements()
+error=[]
+
+change_param=[]
+for i in el:
+#_________________________________________________________________________________________________________________________________________________
+	shorttimepar1 = i.GetParameters("Номер помещения")[0].AsString()
+	i.GetParameters("ВН_номер_помещения_текст")[0].Set(shorttimepar1)
+#_________________________________________________________________________________________________________________________________________________	
+	shorttimepar2 = i.GetParameters("Имя помещения")[0].AsString()
+	i.GetParameters("ВН_наим_помещ")[0].Set(shorttimepar2)
+#_________________________________________________________________________________________________________________________________________________	
+	shorttimepar3 = i.GetParameters("Площадь")[0].AsDouble()
+	change_param.append(shorttimepar3)
+	try:
+		i.LookupParameter("BH_площадь").Set(shorttimepar3*koef)
+		#i.LookupParameter("Комментарии").Set(str(i.LookupParameter("BH_площадь").AsDouble()))
+	except:
+		error.append(i)
+#_________________________________________________________________________________________________________________________________________________	
+	shorttimepar4 = i.GetParameters("Полная высота")[0].AsDouble()
+	i.GetParameters("ВН_высота")[0].Set(shorttimepar4*kf)
+#_________________________________________________________________________________________________________________________________________________	
+	shorttimepar5 = i.GetParameters("Объем")[0].AsDouble()
+	i.GetParameters("ВН_объем_помещения")[0].Set(shorttimepar5*kf3)
+
+#_________________________________________________________________________________________________________________________________________________
+
+	if (i.GetParameters("ВН_тр_кр_приток")[0].AsDouble() == 0) or (i.GetParameters("ВН_кратность_или_пр-выт")[0].AsInteger() == 1):
+		
+		shorttimepar6 = i.GetParameters("ВН_приток_всего")[0].AsDouble()/(i.GetParameters("Объем")[0].AsDouble()*kf3)
+		i.GetParameters("ВН_тр_кр_приток")[0].Set(shorttimepar6)
+	elif (i.GetParameters("ВН_тр_кр_приток")[0].AsDouble() != 0) or (i.GetParameters("ВН_кратность_или_пр-выт")[0].AsInteger() != 1):
+		
+		shorttimepar6 = i.GetParameters("ВН_тр_кр_приток")[0].AsDouble()*(i.GetParameters("Объем")[0].AsDouble()*kf3)
+		i.GetParameters("ВН_приток_всего")[0].Set(shorttimepar6)
+	elif (i.GetParameters("ВН_тр_кр_приток")[0].AsDouble() != 0) and (i.GetParameters("ВН_приток_всего")[0].AsDouble() != 0):
+		pass
+
+#_________________________________________________________________________________________________________________________________________________
+
+	if (i.GetParameters("ВН_тр_кр_вытяжка")[0].AsDouble() == 0) or (i.GetParameters("ВН_кратность_или_пр-выт")[0].AsInteger() == 1):
+		
+		shorttimepar7 = i.GetParameters("ВН_вытяжка_всего")[0].AsDouble()/(i.GetParameters("Объем")[0].AsDouble()*kf3)
+		i.GetParameters("ВН_тр_кр_вытяжка")[0].Set(shorttimepar7)
+		
+	elif (i.GetParameters("ВН_тр_кр_вытяжка")[0].AsDouble() != 0) or (i.GetParameters("ВН_кратность_или_пр-выт")[0].AsInteger() != 1):
+		
+		shorttimepar7 = i.GetParameters("ВН_тр_кр_вытяжка")[0].AsDouble()*(i.GetParameters("Объем")[0].AsDouble()*kf3)
+		i.GetParameters("ВН_вытяжка_всего")[0].Set(shorttimepar7)
+		
+	elif (i.GetParameters("ВН_тр_кр_вытяжка")[0].AsDouble() != 0) and (i.GetParameters("ВН_вытяжка_всего")[0].AsDouble() != 0):
+		pass
+	
+#_________________________________________________________________________________________________________________________________________________
+	
+"""
+t = el[0].GetParameters("ВН_номер_помещения")[0]
+t2 = t.Set(333)
+t1=dir(t2)
+"""
+TransactionManager.Instance.ForceCloseTransaction()	
+OUT = error
+</Script>
+    </PythonNodeModels.PythonNode>
+    <DSRevitNodesUI.Categories guid="60c4242e-dcf4-44c2-a158-606c70734502" type="DSRevitNodesUI.Categories" nickname="Categories" x="106.500923374624" y="136.998614938064" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="true" index="472:MEPSpaces" />
+    <CoreNodeModels.Watch guid="f1d2e34b-0e51-4cf9-bd1f-253f4dddb662" type="CoreNodeModels.Watch" nickname="Watch" x="1054.24282824459" y="54.3695401780536" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <CoreNodeModels.Watch guid="0e34f701-3d05-441a-93f6-60a479b8cd13" type="CoreNodeModels.Watch" nickname="Watch" x="390.498814768298" y="1.13934899142885" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <CoreNodeModels.Input.BoolSelector guid="23d85d08-c8fb-4f2d-93dc-e8007c6d2a45" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="368.500064642828" y="224.846951969028" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="71a0cc02-5e55-4901-97f4-e89402cf038f" start_index="0" end="f1d2e34b-0e51-4cf9-bd1f-253f4dddb662" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="60c4242e-dcf4-44c2-a158-606c70734502" start_index="0" end="0e34f701-3d05-441a-93f6-60a479b8cd13" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0e34f701-3d05-441a-93f6-60a479b8cd13" start_index="0" end="71a0cc02-5e55-4901-97f4-e89402cf038f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="23d85d08-c8fb-4f2d-93dc-e8007c6d2a45" start_index="0" end="71a0cc02-5e55-4901-97f4-e89402cf038f" end_index="1" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Фоновый просмотр" eyeX="-21.0393524169922" eyeY="25.9471778869629" eyeZ="48.7278366088867" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
