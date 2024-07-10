@@ -1,0 +1,1112 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Формирования наименования изделий ОВ2 для спецификации v_1.2 rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "69d972f4d04d4ea7af0b485ba8b1570e",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "a95e13e6387a45f6945e5038740dffed",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "c3f2d89fb7d74ddf81c2a4cd6220db0d",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\nel1 = IN[0]\nel2 = IN[1]\n#Назначьте вывод переменной OUT.\nOUT = [el1, el2]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "624e7648e2444c4d8c9596381cd78465",
+      "Inputs": [
+        {
+          "Id": "8ed8a3cf4ef34465a96214a699da7f21",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "acf29363d28b457ebae0b54aa4c598f2",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6470eb96ee964acf8946f775e84d12eb",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"1. Оборудование\";",
+      "Id": "23b65b3adad14a4ebbcab8bf089ee423",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0b11c7d090f84157b0bdf16e625a9df7",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"4. Воздухораспределители\";",
+      "Id": "3ae8a78de9674819b660b625358bf090",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5b7d93b8d66b4666b57cc3f8c057f903",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"2. Арматура воздуховодов\";",
+      "Id": "99b02a9c025f43caa729993dbf4ee161",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ec455b746799483e9094f6b23a3595be",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"5.  Соединительные детали воздуховодов\";",
+      "Id": "7d78048b6b604e98982a85a960113d27",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ebf14aeef6d24bc08cfa5baabc7bc12d",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"3. Воздуховоды\";",
+      "Id": "f6b27b6005784979940e92980204c97b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "adc00dec31814034891376c4455e06d8",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"6. Изоляция воздуховодов\";",
+      "Id": "aabc0a5bc19d4e2cbb44da9c101e965b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0d1dcfd772f240a694143f51fca48d83",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\nel1 = IN[0]\nel2 = IN[1]\n#Назначьте вывод переменной OUT.\nOUT = [el1, el2]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "c94a1e4c6892487694d96cf9b87e438e",
+      "Inputs": [
+        {
+          "Id": "020a27d9e5f14d7eb3a60ffdef5f45d1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "572b658c214840f3b359f62e68218bd2",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f21d9d9b30ba42ddbf356d394602281a",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\nel1 = IN[0]\nel2 = IN[1]\n#Назначьте вывод переменной OUT.\nOUT = [el1, el2]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "4519bafb8a254706b06a8f1f3ae652c5",
+      "Inputs": [
+        {
+          "Id": "aa415e03eefa47a89e6e4cb393653edb",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b3e56d6ab3774785a1258d1ba1fca9c5",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ce35ac7c6da44bcf8456c3ef1c0cb4f4",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "1.1;",
+      "Id": "2f1ff8f5f59f4de78ebba5abc6aa6a9e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4352724b078443cf829947eae13baa5b",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "25;",
+      "Id": "adfcb4fa2cb94374be9586655132334e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7d9274c546db47fdbb3ca19edaa14b01",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "200;",
+      "Id": "b90bf6d6e73e4a00ad212348f1979d05",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "16255cd4d8ec4f77afc743a792a7defd",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\nimport sys\nimport clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\nclr.AddReference('RevitAPI')\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\nfrom System.Collections.Generic import List\nimport math\n#from threading import Thread\nimport re\nimport time\n#----------------------------------------------\n\n#line___________________________________________________________\npipe_f=ElementCategoryFilter(BuiltInCategory.OST_DuctCurves)\npipeIsole_f=ElementCategoryFilter(BuiltInCategory.OST_DuctInsulations)\nflexPipe_f=ElementCategoryFilter(BuiltInCategory.OST_FlexDuctCurves)\n#-----------------------------------------------------------------\n\n#massive_____________________________________________________________________\nline_filter_mas=[]\nline_filter_mas.append(pipe_f)\nline_filter_mas.append(pipeIsole_f)\nline_filter_mas.append(flexPipe_f)\n# Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\nADSK_gr=UnwrapElement(IN[1])\nkoefZap=UnwrapElement(IN[2])\nminD=UnwrapElement(IN[3])\nminH=UnwrapElement(IN[4])\n# Разместите код под этой строкой\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n\n\n\nk=0\n#_Получение уровней________________________________________________\nlevelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)\ncollector = FilteredElementCollector(doc)\nmas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()\nlevelmas=[]\n#_________________________________________________________________\n\ndef cikleLevel(mas):\n\tlevelmas.Clear()\n\tfor level1 in mas:\n\t\tif -4000/304.8<level1.GetParameters('Фасад')[0].AsDouble()<-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()>=0:\n\t\t\tlevelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])\n\treturn levelmas\n#_________________________________________________________________\ndef groupMas(grupNameMas,element):\n\ttry:\n\t\tif str(element.Category.Name)[0:3]!='Мат':\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])\n\t\telse:\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])\n\texcept:\n\t\tbag.append([\"ADSK_Группирование\",element])\t\t\t\n\treturn bag\ndef adskCount(element):\n\ttry:\n\t\telement.GetParameters('ADSK_Количество')[0].Set(element.GetParameters('Длина')[0].AsDouble()*304.8/1000*koefZap)\n\texcept:\n\t\tbag.append([\"ADSK_Количество\",element])\t\t\t\n\treturn bag\ndef lsrSystemType(element):\n\ttry:\n\t\telement.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Тип системы')[0].AsValueString())\n\texcept:\n\t\tbag.append([\"LSR_Тип системы\",element])\t\t\t\n\treturn bag\t\ndef lsrSystemName(element):\n\ttry:\n\t\telement.GetParameters('LSR_Имя системы')[0].Set(element.GetParameters('Имя системы')[0].AsString())\n\texcept:\n\t\tbag.append([\"LSR_Имя системы\",element])\t\t\t\n\treturn bag\t\t\ndef DirectionType(element,d,l):\n\ttry:\n\t\telement.GetParameters('LSR_Тип разводки')[0].Set('Разводка')\n\t\t\n\t\tif float(re.sub('[^0-9]', '', (element.LookupParameter('Размер').AsString())))>=d: \n\t\t\tX1_2=element.Location.Curve.GetEndPoint(0).X\n\t\t\tY1_2=element.Location.Curve.GetEndPoint(0).Y\n\t\t\tZ1_2=element.Location.Curve.GetEndPoint(0).Z\n\t\t\tX2_2=element.Location.Curve.GetEndPoint(1).X\n\t\t\tY2_2=element.Location.Curve.GetEndPoint(1).Y\n\t\t\tZ2_2=element.Location.Curve.GetEndPoint(1).Z\n\t\t\tif abs(abs(X1_2)-abs(X2_2))<0.5 and abs(abs(Y1_2)-abs(Y2_2))<0.5 and abs(Z1_2-Z2_2)>l/304.8 :\n\t\t\t\telement.GetParameters('LSR_Тип разводки')[0].Set('Стояк')\n\texcept:\n\t\tbag.append([\"LSR_Тип разводки\",element])\t\t\t\n\treturn bag\t\nbag1=[]\t\ndef pipeName(element):\n\ti=element\n\ttest=[]\n\ttry:\n\t\tif str(element.Category.Name)[0:3]=='Мат':\n\t\t\telement.LookupParameter('ADSK_Наименование').Set(str(element.Name)+' Толщиной '+str(int(element.LookupParameter('Толщина изоляции').AsDouble()*304.8))+'мм для трубы '+str(element.LookupParameter('Размер воздуховода').AsString()))\n\t\t\t\t\t\n\t\tif str(element.Category.Name)[0:3]=='Гиб':\t\n\t\t\telement.LookupParameter('ADSK_Наименование').Set(str(element.FlexDuctType.LookupParameter('Комментарии к типоразмеру').AsString())+' ⌀'+str(element.LookupParameter('Диаметр').AsValueString()))\n\t\n\texcept:\n\t\tbag.append([\"ADSK_Наименование\",element])\t\n\t\t\t\n\t\n\tif element.Category.Name[0:3]=='Воз':\n\t\ttext0='Воздуховод из тонколистовой оцинкованной стали'#, Ø 200 толщиной S=0,5мм\n\t\ttry:\n\t\t\t#2\n\t\t\tif i.LookupParameter('Имя системы').AsString()[0:2]=='ДВ':\n\t\t\t\ttext='толщиной S='+t+'мм'\n\t\t\t\ttry:\n\t\t\t\t\td='Ø '+i.LookupParameter('Диаметр').AsValueString()\n\t\t\t\texcept:\n\t\t\t\t\td=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()\n\t\t\t\t\t\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)\n\t\t\telif i.Name[0:1]=='С' and i.LookupParameter('Имя системы').AsString()[0:2]!='ДВ':\n\t\t\t\ttry:\n\t\t\t\t\td=i.LookupParameter('Диаметр').AsValueString()\n\t\t\t\t\n\t\t\t\t\tif int(d)<=250:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True' :\n\t\t\t\t\t\ttext='толщиной S=0,5мм'\n\t\t\t\t\tif 300<=int(d)<=1000:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True':\n\t\t\t\t\t\ttext='толщиной S=0,7мм'\n\t\t\t\t\tif 1250<=int(d)<=2000:\n\t\t\t\t\t\ttext='толщиной S=0,9'\t\t\n\t\t\t\texcept:\n\t\t\t\t\tif int(i.LookupParameter('Ширина').AsValueString())<=250 and int(i.LookupParameter('Высота').AsValueString())<=250 :\n\t\t\t\t\t\ttext='толщиной S=0,5мм'\n\t\t\t\t\tif 300<=int(i.LookupParameter('Ширина').AsValueString())<=1000 or 300<=int(i.LookupParameter('Высота').AsValueString())<=1000 :\n\t\t\t\t\t\ttext='толщиной S=0,7мм'\n\t\t\t\t\tif 1250<=int(i.LookupParameter('Ширина').AsValueString())<=2000 or 1250<=int(i.LookupParameter('Высота').AsValueString())<=2000:\n\t\t\t\t\t\ttext='толщиной S=0,9мм'\t\n\t\t\t\ttry:\n\t\t\t\t\td='Ø '+i.LookupParameter('Диаметр').AsValueString()\n\t\t\t\texcept:\n\t\t\t\t\td=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()\n\t\t\t\t\t\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)\n\t\n\t\t\telse: \n\t\n\t\t\t\ttry:\n\t\t\t\t\td=i.LookupParameter('Диаметр').AsValueString()\n\t\t\t\t\n\t\t\t\t\tif int(d)<=250:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True' :\n\t\t\t\t\t\ttext='толщиной S=0,5мм'\n\t\t\t\t\tif 300<=int(d)<=1000:# and str(i.LookupParameter('Тип изоляции').HasValue)!='True':\n\t\t\t\t\t\ttext='толщиной S=0,7мм'\n\t\t\t\t\tif 1250<=int(d)<=2000:\n\t\t\t\t\t\ttext='толщиной S=0,9'\t\t\n\t\t\t\texcept:\n\t\t\t\t\tif int(i.LookupParameter('Ширина').AsValueString())<=250 and int(i.LookupParameter('Высота').AsValueString())<=250 :\n\t\t\t\t\t\ttext='толщиной S=0,5мм'\n\t\t\t\t\tif 300<=int(i.LookupParameter('Ширина').AsValueString())<=1000 or 300<=int(i.LookupParameter('Высота').AsValueString())<=1000 :\n\t\t\t\t\t\ttext='толщиной S=0,7мм'\n\t\t\t\t\tif 1250<=int(i.LookupParameter('Ширина').AsValueString())<=2000 or 1250<=int(i.LookupParameter('Высота').AsValueString())<=2000:\n\t\t\t\t\t\ttext='толщиной S=0,9мм'\t\n\t\t\t\ttry:\n\t\t\t\t\td='Ø '+i.LookupParameter('Диаметр').AsValueString()\n\t\t\t\texcept:\n\t\t\t\t\td=i.LookupParameter('Ширина').AsValueString()+'x'+i.LookupParameter('Высота').AsValueString()\n\t\t\t\t\t\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set(text0+' '+d+' '+text)\n\t\texcept:\n\t\t\tbag1.append(i)\t\n\t\t\n\treturn bag1\ndef pipeMarka(element):\n\ttry:\n\t\t\t\t\t\n\t\tif str(element.Category.Name)[0:3]=='Воз' and str(element.PipeType.LookupParameter('ADSK_Марка').AsString())==\"None\":\n\t\t\telement.DuctType.LookupParameter('ADSK_Марка').Set(str(element.LookupParameter('Материал').AsValueString()))\n\t\tif str(element.Category.Name)[0:3]=='Гиб':\t\n\t\t\telement.FlexPipeType.LookupParameter('ADSK_Марка').Set(str(element.FlexDuctType.LookupParameter('Комментарии к типоразмеру').AsString()))\n\texcept:\n\t\tbag.append([\"ADSK_Марка\",element])\t\t\t\n\treturn bag\t\t\n\t\n\n\t\ncount=0\ntest=[]\nlevelmas2=cikleLevel(mas)\nlevelCount=len(levelmas2)\n\nbag=[]\nlevelMas0=[]\nlinemas01=[]\nlinemas0=[]\nfor filter in line_filter_mas:\n\tcollector = FilteredElementCollector(doc)\n\tlineMas0=collector.WherePasses(filter).WhereElementIsNotElementType().ToElements()\n\t\n\tfor line in lineMas0:\n\t\tpipeCurve = line.Location.Curve; point0=pipeCurve.GetEndPoint(0);point1=pipeCurve.GetEndPoint(1) \n\t\tpoint0x=point0.X; point0y=point0.Y; point0z=point0.Z\n\t\tpoint1x=point1.X; point1y=point1.Y;\tpoint1z=point1.Z\n\t\tdx=point0x-point1x;\tdy=point0y-point1y;\tdz=(point0z+point1z)/2\n\t\t\n\t\tzpoint=dz\n\t\tlinemas01.append([line,zpoint])\nTransactionManager.Instance.EnsureInTransaction(doc)\ncount=0\ntest=[]\nlevelCount=len(cikleLevel(mas))\nlevelmas2=cikleLevel(mas)\n\n\nsorted_list = sorted(levelmas2, key=lambda x: ( x[1]))\ntest1=[]\nfor i in linemas01:\n\t\n\tcount=0\n\tgroupMas(ADSK_gr,i[0])\n\tadskCount(i[0])\n\tlsrSystemType(i[0])\n\tlsrSystemName(i[0])\n\tDirectionType(i[0],minD,minH)\n\ttest1.append(pipeName(i[0]))\n\tpipeMarka(i[0])\n\t\n\ttry:\t\n\t\twhile count<(levelCount-1):\n\t\t\tk=sorted_list[count][1]\n\t\t\tk1=sorted_list[count+1][1]\n\t\t\tif i[1]<0 :\n\t\t\t\ttry:\n\t\t\t\t\ti[0].GetParameters('Базовый уровень')[0].Set(sorted_list[0][0].Id)\n\t\t\t\texcept:\n\t\t\t\t\tbag.append([\"ADSK_Этаж\",i[0]])\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('-01')\n\t\t\telif k<i[1]<k1 :\n\t\t\t\ttry:\n\t\t\t\t\ti[0].GetParameters('Базовый уровень')[0].Set(sorted_list[count][0].Id)\n\t\t\t\texcept:\n\t\t\t\t\tbag.append([\"ADSK_Этаж\",i[0]])\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))\n\t\t\telif i[1]>sorted_list[len(sorted_list)-1][1]:\n\t\t\t\ttry:\n\t\t\t\t\ti[0].GetParameters('Базовый уровень')[0].Set(sorted_list[len(sorted_list)-1][0].Id)\n\t\t\t\texcept:\n\t\t\t\t\tbag.append([\"ADSK_Этаж\",i[0]])\t\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')\n\t\t\tcount=count+1\n\texcept:\n\t\tbag.append([\"ADSK_Этаж\",i[0]])\t\t\nTransactionManager.Instance.ForceCloseTransaction()\n\n\nt=bag1\nt1=dir(t)\n# Назначьте вывод переменной OUT.\nOUT = test1",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "af17d718d51a4f8f808edb353e608347",
+      "Inputs": [
+        {
+          "Id": "cc2f1cc75ade4a22ab224242d712e2f7",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b52a500e94204f9fbb84b5ee460b9304",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b3248b994af349379679d9b64dedcb01",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8ff9faae3b4645d59e576344c06246e0",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "630e2123af054ed680b826b6a8409e62",
+          "Name": "IN[4]",
+          "Description": "Input #4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3e21ff529c0c41ac856ad606e2e05f66",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "69d972f4d04d4ea7af0b485ba8b1570e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5909e4eb170d41838ed2e98dc2c8c13d",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "7050b5ee6b48495e90c5bf52f0efe8e8",
+      "Inputs": [
+        {
+          "Id": "a5c104527fec42cba2ceb8e940f92e25",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1e52c915c0644ad792c65903a86c2cdc",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\nimport sys\nimport clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\nclr.AddReference('RevitAPI')\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\nfrom System.Collections.Generic import List\nimport math\n#from threading import Thread\nimport time\n#----------------------------------------------\n#line___________________________________________________________\n\nmechlEquip_f=ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\nvozduh_f=ElementCategoryFilter(BuiltInCategory.OST_DuctTerminal)\n\n#massive_____________________________________________________________________\nline_filter_mas=[]\nline_filter_mas.append(mechlEquip_f)\nline_filter_mas.append(vozduh_f)\n\n\n# Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\n#Elem = UnwrapElement(IN[0])\nADSK_gr=UnwrapElement(IN[1])\n# Разместите код под этой строкой\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\nbag=[]\n\n\nk=0\nlevcountbild=1\nlevelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)\ncollector = FilteredElementCollector(doc)\nmas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()\nlevelmas=[]\nznach=[]\n\ndef cikleLevel(mas):\n\tlevelmas.Clear()\n\tfor level1 in mas:\n\t\tif -4000/304.8<level1.GetParameters('Фасад')[0].AsDouble()<-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()>=0:\n\t\t\tlevelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])\n\treturn levelmas\ndef groupMas(grupNameMas,element):\n\ttry:\n\t\tif str(element.Category.Name)[0:3]!='Сан':\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])\n\t\telse:\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])\n\texcept:\n\t\tbag.append([\"ADSK_Группирование\",element])\t\t\t\n\treturn bag\ndef adskCount(element):\n\ttry:\n\t\telement.GetParameters('ADSK_Количество')[0].Set(1)\n\texcept:\n\t\tbag.append([\"ADSK_Количество\",element])\t\t\t\n\treturn bag\ndef lsrSystemType(element):\n\ttry:\n\t\telement.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Классификация систем')[0].AsString())\n\texcept:\n\t\tbag.append([\"LSR_Тип системы\",element])\t\t\t\n\treturn bag\t\ndef lsrSystemName(element):\n\ttry:\n\t\telement.GetParameters('LSR_Имя системы')[0].Set(str(element.GetParameters('Имя системы')[0].AsString())[0:2])\n\texcept:\n\t\tbag.append([\"LSR_Имя системы\",element])\t\t\t\n\treturn bag\t\n\ndef edinIzmer(element):\n\ttry:\n\t\telement.Symbol.GetParameters('ADSK_Единица измерения')[0].Set('шт.')\n\texcept:\n\t\tbag.append([\"ADSK_Единица измерения\",element])\t\t\t\n\treturn bag\t\t\nTransactionManager.Instance.EnsureInTransaction(doc)\ncount=0\ntest=[]\nlevelCount=len(cikleLevel(mas))\nlevelmas2=cikleLevel(mas)\nlinemas0=[]\nsorted_list = sorted(levelmas2, key=lambda x: ( x[1]))\nfor filter in line_filter_mas:\n\tcollector = FilteredElementCollector(doc)\n\tfor line in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():\n\t\tzpoint=line.Location.Point.Z\n\t\tlinemas0.append([line,zpoint])\n\t\ti=line\n\t\tif filter==vozduh_f:\n\t\t\ttry:\n\t\t\t\toldName=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()\n\t\t\t\tsize=i.LookupParameter('Размер').AsString().split(\"-\")\n\t\t\t\tnewName=i.LookupParameter('ADSK_Наименование').Set(oldName+'  '+size[0])\n\t\t\t\toldNameMark=i.Symbol.LookupParameter('Имя типа').AsString()\n\t\t\t\ti.Symbol.LookupParameter('ADSK_Марка').Set(oldNameMark+' '+size[0])\n\t\t\texcept:\n\t\t\t\ttry:\n\t\t\t\t\tnewName=i.LookupParameter('ADSK_Наименование').Set(i.Symbol.LookupParameter('Имя типа').AsString())\n\t\t\t\texcept:\n\t\t\t\t\tbag.append(i)\n\t\t\nbag=[]\t\nfor i in linemas0:\n\tcount=0\n\tgroupMas(ADSK_gr,i[0])\n\tadskCount(i[0])\n\tlsrSystemType(i[0])\n\tlsrSystemName(i[0])\n\twhile count<(levelCount-1):\n\t\t\n\t\tk=sorted_list[count][1]\n\t\tk1=sorted_list[count+1][1]\n\t\t\n\t\t\n\t\t#\n\t\tif i[1]+200/304.8<0 :\n\t\t\ttry:\n\t\t\t\ti[0].LookupParameter('Отметка от уровня').Set(i[1]-sorted_list[0][1])\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[0][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('-01')\n\t\t\texcept:\n\t\t\t\tbag.append(i[0])\n\t\t\n\t\telif k<i[1]+200/304.8<k1:\n\t\t\ttry:\n\t\t\t\ti[0].LookupParameter('Отметка от уровня').Set(i[1]-k)\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[count][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))\n\t\t\texcept:\n\t\t\t\tbag.append(i[0])\n\t\t\n\t\telif i[1]>sorted_list[len(sorted_list)-1][1]:\n\t\t\ttry:\n\t\t\t\ti[0].LookupParameter('Отметка от уровня').Set(i[1]-sorted_list[len(sorted_list)-1][1])\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[len(sorted_list)-1][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')\n\t\t\texcept:\n\t\t\t\tbag.append(i[0])\n\t\t\t\n\t\t\n\t\t\t\n\t\t\t\n\t\tcount=count+1\n\t\t\t\n\n\n\n\n\n\t\t\n\t\t\n\t\t\t\nt=linemas0#bag#linemas0[0][0].GetParameters('Отметка от уровня')[0].Set(20000)\nTransactionManager.Instance.ForceCloseTransaction()\n\n\n\nt1=dir(t)\n# Назначьте вывод переменной OUT.\nOUT = t,t1",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "b2a4de279b3f4ce6bca8e23e926bfc89",
+      "Inputs": [
+        {
+          "Id": "d12698e39ab64bbaa6c5ee5fbe9c288b",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7752b8c4372648d39285b2d83fffb738",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8fdbce20595a4553a068e42d425010de",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "a95e13e6387a45f6945e5038740dffed",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d1eb3dfedac044ca840e2f6d07f81847",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "be1e3651280a4764a31af66728e650d4",
+      "Inputs": [
+        {
+          "Id": "f20b5ada1ba24c08a2c4947e58c5edb6",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f592396161a642a1a480e33550a31892",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\nimport sys\nimport clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\nclr.AddReference('RevitAPI')\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\nfrom System.Collections.Generic import List\nimport math\n#from threading import Thread\nimport time\n#----------------------------------------------\n#line___________________________________________________________\npipe_filter=ElementCategoryFilter(BuiltInCategory.OST_PipeCurves)\nduct_filter=ElementCategoryFilter(BuiltInCategory.OST_DuctCurves)\n\n#-----------------------------------------------------------------\n#OV_VK___________________________________________________________________\nductFitting_f=ElementCategoryFilter(BuiltInCategory.OST_DuctFitting)\npipeFitting_f=ElementCategoryFilter(BuiltInCategory.OST_PipeFitting)\n\nmechanicalEquipment_f=ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\npipeaccs_f=ElementCategoryFilter(BuiltInCategory.OST_PipeAccessory)\nductaccs_f=ElementCategoryFilter(BuiltInCategory.OST_DuctAccessory)\n\n#massive_____________________________________________________________________\nline_filter_mas=[]\nline_filter_mas.append(ductFitting_f)\nline_filter_mas.append(ductaccs_f)\n\n\n\n#line_filter_mas.append(cableTray_filter)\n\n\n\n# Введенные в этом узле данные сохраняется в виде списка в переменных IN.\ndataEnteringNode = IN\nADSK_gr=UnwrapElement(IN[1])\n#Elem = UnwrapElement(IN[0])\n\n# Разместите код под этой строкой\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\ntest=[]\n\n\nk=0\nlevcountbild=1\nlevelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)\ncollector = FilteredElementCollector(doc)\nmas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()\nlevelmas=[]\nznach=[]\nbag=[]\ndef cikleLevel(mas):\n\tlevelmas.Clear()\n\tfor level1 in mas:\n\t\tif -4000/304.8<level1.GetParameters('Фасад')[0].AsDouble()<-2000/304.8 or level1.GetParameters('Фасад')[0].AsDouble()>=0:\n\t\t\tlevelmas.append([level1,level1.GetParameters('Фасад')[0].AsDouble()])\n\treturn levelmas\ndef groupMas(grupNameMas,element):\n\ttry:\n\t\tif str(element.Category.Name)[0:3]!='Сое':\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[0])\n\t\telse:\n\t\t\telement.GetParameters('ADSK_Группирование')[0].Set(grupNameMas[1])\n\texcept:\n\t\tbag.append([\"ADSK_Группирование\",element])\t\t\t\n\treturn bag\ndef adskCount(element):\n\ttry:\n\t\telement.GetParameters('ADSK_Количество')[0].Set(1)\n\texcept:\n\t\tbag.append([\"ADSK_Количество\",element])\t\t\t\n\treturn bag\ndef lsrSystemType(element):\n\ttry:\n\t\telement.GetParameters('LSR_Тип системы')[0].Set(element.GetParameters('Тип системы')[0].AsValueString())\n\texcept:\n\t\tbag.append([\"LSR_Тип системы\",element])\t\t\t\n\treturn bag\t\ndef lsrSystemName(element):\n\ttry:\n\t\telement.GetParameters('LSR_Имя системы')[0].Set(str(element.GetParameters('Имя системы')[0].AsString())[0:2])\n\texcept:\n\t\tbag.append([\"LSR_Имя системы\",element])\t\t\t\n\treturn bag\t\n\ndef edinIzmer(element):\n\ttry:\n\t\telement.Symbol.GetParameters('ADSK_Единица измерения')[0].Set('шт.')\n\texcept:\n\t\tbag.append([\"ADSK_Единица измерения\",element])\t\t\t\n\treturn bag\t\t\ndef adskNameR(element):\t\t\n\ti=element\n\tn=(i.LookupParameter('Размер').AsString()).split(\"-\")\n\trsplitMas=[]\t\n\tssplitMas=[]\n\t\t\n\ttry:\n\t\tfor j in i.MEPModel.ConnectorManager.Connectors:\n\t\t\tktest = 0\n\t\t\tfor j1 in j.AllRefs:\n\t\t\t\tktest = 21\n\t\t\t\t#test.append([i.LookupParameter('Размер').AsString().split(\"-\")[0],j1.Owner.LookupParameter('Размер').AsString().split(\"-\")[0]])\n\t\t\t\t\n\t\t\t\tif i.LookupParameter('Размер').AsString().split(\"-\")[0]!=j1.Owner.LookupParameter('Размер').AsString().split(\"-\")[0]:\n\t\t\t\t\tktest = 1\n\t\t\t\t\trsplitMas.append(j1.Owner.LookupParameter('Размер').AsString().split(\"-\"))\n\t\t\t\t\tktest = 2\n\t\t\t\t\t\t\n\t\tif \tlen(rsplitMas)>0:\n\t\t\tktest = 3\n\t\t\t#test.append(i)\t\n\t\t\tif rsplitMas[0][0][0:1]=='⌀':\n\t\t\t\tktest = 4\n\t\t\t\td2=\trsplitMas[0][0]\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+d2)\n\t\t\t\tktest = 5\n\t\t\telse:\n\t\t\t\tktest = 6\n\t\t\t\td2=\trsplitMas[0][0]\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+d2)\t\t\n\t\t\t\tktest = 7\n\t\telif len(rsplitMas[0])==0:\n\t\t\tktest = 8\n\t\t\tif rsplitMas[0][0][0:1]=='⌀':\n\t\t\t\t\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+n[0])\n\t\t\telse:\n\t\t\t\t\n\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+n[0])\t\n\texcept:\n\t\ttest.append(i)\n\t\ttest.append(ktest)\n\tif len(i.LookupParameter('ADSK_Наименование').AsString())==0 and i.LookupParameter('Размер').AsString()[0:1]=='⌀':\n\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка воротник'+' '+n[0]+'/'+n[0])\n\telif len(i.LookupParameter('ADSK_Наименование').AsString())==0 and i.LookupParameter('Размер').AsString()[0:1]!='⌀':\n\t\ti.LookupParameter('ADSK_Наименование').Set('Врезка стакан'+' '+n[0]+'/'+n[0])\t\n\t\t\t\t\n\treturn test\t\nTransactionManager.Instance.EnsureInTransaction(doc)\ncount=0\n\nlevelCount=len(cikleLevel(mas))\nlevelmas2=cikleLevel(mas)\nlinemas0=[]\ntest=[]\nsorted_list = sorted(levelmas2, key=lambda x: ( x[1]))\n\nm = []\n\n\n\nfor filter in line_filter_mas:\n\n\tcollector = FilteredElementCollector(doc)\n\t\n\tfor line in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():\n\t\tzpoint=line.Location.Point.Z\n\t\tlinemas0.append([line,zpoint])\n\t\ti=line\n\t\tif \tfilter==ductaccs_f:\n\t\t\ttry:\n\t\t\t\toldName=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()\n\t\t\t\tsize=i.LookupParameter('Размер').AsString().split(\"-\")\n\t\t\t\tnewName=i.LookupParameter('ADSK_Наименование').Set(oldName+'  '+size[0])\n\t\t\t\t\"\"\"\n\t\t\t\toldNameMark=i.Symbol.LookupParameter('Имя типа').AsString()\n\t\t\t\ti.Symbol.LookupParameter('ADSK_Марка').Set(oldNameMark+' '+size[0])\n\t\t\t\t\"\"\"\n\t\t\texcept:\n\t\t\t\tbag.append([\"Ошибки в аксесуарах\",i])\n\t\t\ttry:\n\t\t\t\ti.LookupParameter('ADSK_Количество').Set(i.LookupParameter('Число').AsDouble()*304.8)\t\n\t\t\texcept:\n\t\t\t\tbag.append([\"Ошибки в аксесуарах\",i])\n\t\tif \tfilter==ductFitting_f:\n\t\t\t\n\t\t\tname2=i.Symbol.LookupParameter('Комментарии к типоразмеру').AsString()\t\n\t\t\t\n\t\t\td=i.LookupParameter('Размер').AsString()\n\t\t\ttry:\n\t\t\t\tif name2[0:5]=='Отвод':\n\t\t\t\t\t\n\t\t\t\t\tn=(i.LookupParameter('Размер').AsString()).split(\"-\")\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\te=i.LookupParameter('MC Fitting Angle').AsValueString()\n\t\t\t\t\t#test.append(i)\t\t\n\t\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Отвод'+'-'+e+' '+str(n[0]))\n\t\t\t\t\t\n\t\t\t\telif name2[0:5]=='Перех':\n\t\t\t\t\tn=i.LookupParameter('Размер').AsString()\n\t\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Переход'+' '+n)\n\t\t\t\telif name2[0:5]=='Заглу':\n\t\t\t\t\tn=i.LookupParameter('Размер').AsString()\n\t\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Заглушка'+' '+n)\t\t\t\n\t\t\t\telif name2[0:5]=='Тройн':\n\t\t\t\t\tn=i.LookupParameter('Размер').AsString()\t\n\t\t\t\t\ti.LookupParameter('ADSK_Наименование').Set('Тройник'+' '+n)\t\n\t\t\t\telif name2[0:5]=='Врезк':\n\t\t\t\t\tadskNameR(i)\n\t\t\texcept:\n\t\t\t\tpass\n\t\t\nfor i in linemas0:\n\tcount=0\n\tgroupMas(ADSK_gr,i[0])\n\tadskCount(i[0])\n\tlsrSystemType(i[0])\n\tlsrSystemName(i[0])\n\tedinIzmer(i[0])\n\twhile count<(levelCount-1):\n\t\t\n\t\tk=sorted_list[count][1]\n\t\tk1=sorted_list[count+1][1]\n\t\t\n\t\t\n\t\t#\n\t\tif i[1]<0 :\n\t\t\ttry:\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[0][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('-01')\n\t\t\t\t\n\t\t\texcept:\n\t\t\t\tpass\n\t\telif k<i[1]<k1:\n\t\t\n\t\t\ttry:\n\t\t\t\t\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[count][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('0'+str(count))\n\t\t\t\t\n\t\t\texcept:\n\t\t\t\tpass\t\n\t\telif i[1]>sorted_list[len(sorted_list)-1][1]:\n\t\t\ttry:\n\t\t\t\ti[0].GetParameters('Уровень')[1].Set(sorted_list[len(sorted_list)-1][0].Id)\n\t\t\t\ti[0].GetParameters('ADSK_Этаж')[0].Set('Кровля')\n\t\t\texcept:\n\t\t\t\tpass\n\t\t\t\n\t\tcount=count+1\n\n\n\n\n\n\nTransactionManager.Instance.ForceCloseTransaction()\n\n\nt=bag#levelmas2[len(levelmas2)-1][1]\nt1=dir(t)\n# Назначьте вывод переменной OUT.\nOUT = test #t,t1",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "d1bcd385b5c4405d8263817ecc683b30",
+      "Inputs": [
+        {
+          "Id": "bef5a5e3d5594b50a47499fb11546f12",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c327e3c6e8764a1588413ce8613aec37",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "baa20413c25546a593e3e78470ebbc17",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "c3f2d89fb7d74ddf81c2a4cd6220db0d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "96765f23b45b47598fc1c71361b0d6a1",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "45d0f55255e64504abf5bdd425c1bca5",
+      "Inputs": [
+        {
+          "Id": "991dee7924954881b545ed2940af5d06",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "14550e722eb64afb9e28ff03fd243047",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "6470eb96ee964acf8946f775e84d12eb",
+      "End": "7752b8c4372648d39285b2d83fffb738",
+      "Id": "38378f3f542646a1918c7e333fff81b2"
+    },
+    {
+      "Start": "0b11c7d090f84157b0bdf16e625a9df7",
+      "End": "8ed8a3cf4ef34465a96214a699da7f21",
+      "Id": "a49fa6d9785d4262a77179f76c2521c7"
+    },
+    {
+      "Start": "5b7d93b8d66b4666b57cc3f8c057f903",
+      "End": "acf29363d28b457ebae0b54aa4c598f2",
+      "Id": "4558c09d20cb41e2b6cc5cbf05d3357c"
+    },
+    {
+      "Start": "ec455b746799483e9094f6b23a3595be",
+      "End": "020a27d9e5f14d7eb3a60ffdef5f45d1",
+      "Id": "fe5366a884e5445b8b2e0823d0228af9"
+    },
+    {
+      "Start": "ebf14aeef6d24bc08cfa5baabc7bc12d",
+      "End": "572b658c214840f3b359f62e68218bd2",
+      "Id": "17902d0fe5d44639aa7dbff288edcf14"
+    },
+    {
+      "Start": "adc00dec31814034891376c4455e06d8",
+      "End": "aa415e03eefa47a89e6e4cb393653edb",
+      "Id": "f73af2ced5a74faabfcb04bb6ad7ce82"
+    },
+    {
+      "Start": "0d1dcfd772f240a694143f51fca48d83",
+      "End": "b3e56d6ab3774785a1258d1ba1fca9c5",
+      "Id": "7ddc54b513cf45639a1868b28db8b264"
+    },
+    {
+      "Start": "f21d9d9b30ba42ddbf356d394602281a",
+      "End": "c327e3c6e8764a1588413ce8613aec37",
+      "Id": "32fdc1c0379141419b87f0b599c798a7"
+    },
+    {
+      "Start": "ce35ac7c6da44bcf8456c3ef1c0cb4f4",
+      "End": "b52a500e94204f9fbb84b5ee460b9304",
+      "Id": "1875390d771245cba6c7b1f1d8b95715"
+    },
+    {
+      "Start": "4352724b078443cf829947eae13baa5b",
+      "End": "b3248b994af349379679d9b64dedcb01",
+      "Id": "06f904fe9f0c4d7abdeb6b7bec7a34ed"
+    },
+    {
+      "Start": "7d9274c546db47fdbb3ca19edaa14b01",
+      "End": "8ff9faae3b4645d59e576344c06246e0",
+      "Id": "e665f2f3f97148d3808cbae90b66c940"
+    },
+    {
+      "Start": "16255cd4d8ec4f77afc743a792a7defd",
+      "End": "630e2123af054ed680b826b6a8409e62",
+      "Id": "0efefa139c814430b4ecc867032e47ab"
+    },
+    {
+      "Start": "3e21ff529c0c41ac856ad606e2e05f66",
+      "End": "a5c104527fec42cba2ceb8e940f92e25",
+      "Id": "8de81049762a4809b47cc86486cbb47b"
+    },
+    {
+      "Start": "5909e4eb170d41838ed2e98dc2c8c13d",
+      "End": "cc2f1cc75ade4a22ab224242d712e2f7",
+      "Id": "2d05034e82294ec3b4585e0917e0dfe2"
+    },
+    {
+      "Start": "8fdbce20595a4553a068e42d425010de",
+      "End": "f20b5ada1ba24c08a2c4947e58c5edb6",
+      "Id": "a67921fe152448a98af21dbaf6552a7e"
+    },
+    {
+      "Start": "d1eb3dfedac044ca840e2f6d07f81847",
+      "End": "d12698e39ab64bbaa6c5ee5fbe9c288b",
+      "Id": "1b0904986a9148aba36038a34e4cf138"
+    },
+    {
+      "Start": "baa20413c25546a593e3e78470ebbc17",
+      "End": "991dee7924954881b545ed2940af5d06",
+      "Id": "47bed5c9ae634f788d151ca45f128fca"
+    },
+    {
+      "Start": "96765f23b45b47598fc1c71361b0d6a1",
+      "End": "bef5a5e3d5594b50a47499fb11546f12",
+      "Id": "f3f7c0e180ac4a10832f7e3698216886"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "624e7648e2444c4d8c9596381cd78465",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 153.316239912074,
+        "Y": 288.078645402092
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "23b65b3adad14a4ebbcab8bf089ee423",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -278.0,
+        "Y": 264.638556945308
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "3ae8a78de9674819b660b625358bf090",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -280.0,
+        "Y": 349.638556945308
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "99b02a9c025f43caa729993dbf4ee161",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -281.0,
+        "Y": 506.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "7d78048b6b604e98982a85a960113d27",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -281.0,
+        "Y": 588.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "f6b27b6005784979940e92980204c97b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -275.675264838033,
+        "Y": 746.201635286063
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "aabc0a5bc19d4e2cbb44da9c101e965b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -277.675264838033,
+        "Y": 834.201635286063
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "c94a1e4c6892487694d96cf9b87e438e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 152.316239912074,
+        "Y": 529.440088456784
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "4519bafb8a254706b06a8f1f3ae652c5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 160.64097507404,
+        "Y": 786.641723742847
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Коэф запаса",
+        "Id": "2f1ff8f5f59f4de78ebba5abc6aa6a9e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 848.054256983479,
+        "Y": 1187.27747957899
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Миним диаметр стояка",
+        "Id": "adfcb4fa2cb94374be9586655132334e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 849.306994791745,
+        "Y": 1100.86661749279
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Миним высота стояка",
+        "Id": "b90bf6d6e73e4a00ad212348f1979d05",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 956.882881393331,
+        "Y": 1184.59022630194
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "af17d718d51a4f8f808edb353e608347",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1406.31708529647,
+        "Y": 895.601638880495
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "69d972f4d04d4ea7af0b485ba8b1570e",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 869.794222500777,
+        "Y": 812.131404687368
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "7050b5ee6b48495e90c5bf52f0efe8e8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1660.35319942862,
+        "Y": 882.467803429656
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "b2a4de279b3f4ce6bca8e23e926bfc89",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 643.998871087068,
+        "Y": 291.521787928061
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "a95e13e6387a45f6945e5038740dffed",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 373.89189628679,
+        "Y": 177.926090623856
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "be1e3651280a4764a31af66728e650d4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 997.899509654258,
+        "Y": -124.295915101414
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "d1bcd385b5c4405d8263817ecc683b30",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 705.906859813575,
+        "Y": 601.187931438572
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "c3f2d89fb7d74ddf81c2a4cd6220db0d",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 406.452301710639,
+        "Y": 528.425044282333
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "45d0f55255e64504abf5bdd425c1bca5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1105.56030427313,
+        "Y": 570.712509025426
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "fc0a5973318d47eeae6780360cfc2de6",
+        "Title": "Входные данные ВК",
+        "Nodes": [
+          "2f1ff8f5f59f4de78ebba5abc6aa6a9e",
+          "adfcb4fa2cb94374be9586655132334e",
+          "b90bf6d6e73e4a00ad212348f1979d05"
+        ],
+        "Left": 838.054256983479,
+        "Top": 1054.86661749279,
+        "Width": 357.62862440985191,
+        "Height": 225.01086208619995,
+        "FontSize": 30.0,
+        "InitialTop": 1100.86661749279,
+        "InitialHeight": 231.41086208620004,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "94faefc39ce848f1bf85a80128d9a3b8",
+        "Title": "1",
+        "Nodes": [
+          "624e7648e2444c4d8c9596381cd78465",
+          "23b65b3adad14a4ebbcab8bf089ee423",
+          "3ae8a78de9674819b660b625358bf090"
+        ],
+        "Left": -290.0,
+        "Top": 218.63855694530798,
+        "Width": 578.116239912074,
+        "Height": 223.60000000000002,
+        "FontSize": 30.0,
+        "InitialTop": 264.638556945308,
+        "InitialHeight": 230.0,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "89e4a46231c84abe8edcac71639f43a5",
+        "Title": "2",
+        "Nodes": [
+          "99b02a9c025f43caa729993dbf4ee161",
+          "7d78048b6b604e98982a85a960113d27",
+          "c94a1e4c6892487694d96cf9b87e438e"
+        ],
+        "Left": -291.0,
+        "Top": 460.0,
+        "Width": 578.116239912074,
+        "Height": 220.60000000000002,
+        "FontSize": 30.0,
+        "InitialTop": 506.0,
+        "InitialHeight": 227.0,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "37b11474807c4e2480878b9e80dc4044",
+        "Title": "3",
+        "Nodes": [
+          "f6b27b6005784979940e92980204c97b",
+          "aabc0a5bc19d4e2cbb44da9c101e965b",
+          "4519bafb8a254706b06a8f1f3ae652c5"
+        ],
+        "Left": -287.675264838033,
+        "Top": 700.201635286063,
+        "Width": 583.11623991207307,
+        "Height": 226.60000000000002,
+        "FontSize": 30.0,
+        "InitialTop": 746.201635286063,
+        "InitialHeight": 233.0,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "e6b5c4e9b2dd46a9b1c8812d01cb6a46",
+        "Title": "Штамп",
+        "Nodes": [
+          "23b321687366423989c69d7edcbc99f6",
+          "a4a075785d7b4740803a2ca4e24bbc8c"
+        ],
+        "Left": -274.15265875071645,
+        "Top": -101.78618375666947,
+        "Width": 607.3161411624809,
+        "Height": 189.0,
+        "FontSize": 36.0,
+        "InitialTop": -48.58618375666947,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "23b321687366423989c69d7edcbc99f6",
+        "Title": "Скрипт предназначен для формирования наименования изделий ОВ2 для спецификации v_1.2 rvt_v22",
+        "Nodes": [],
+        "Left": 40.763482411764471,
+        "Top": -44.86219011378239,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "a4a075785d7b4740803a2ca4e24bbc8c",
+        "Title": "Script Name: Формирования наименования изделий ОВ2 для спецификации v_1.2 rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/26 17:46",
+        "Nodes": [],
+        "Left": -264.15265875071645,
+        "Top": -48.58618375666947,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 377.9364994157084,
+    "Y": -287.19724967593368,
+    "Zoom": 1.1729270780619547
+  }
+}

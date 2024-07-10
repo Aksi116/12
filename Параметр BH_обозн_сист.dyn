@@ -1,0 +1,723 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Параметр BH_обозн_сист",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n#groups = doc.Settings.Categories\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n#The inputs to this node will be stored as a list in the IN variable.\n#---------------------------------\n\n#categoriesSTR = UnwrapElement(IN[1])\n\n\n\n#--------------------------------\n\ncollector = Autodesk.Revit.DB.FilteredElementCollector(doc)\nmachinefilter = ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\nmas=collector.WherePasses(machinefilter).WhereElementIsNotElementType().ToElements()\n\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nbag=[]\n\n\n\nfor element in mas:\n    try:\n    \tk = '022'\n    \tadskZavod = element.LookupParameter('ADSK_Завод-изготовитель').AsString()\n    \tk = '01'\n    \tnameTypeFamily = element.Name\n    \tk = '02'\n        nameSystem = element.LookupParameter('Имя системы').AsString()\n        k = '03'\n        sokrNameSystem = element.LookupParameter('Сокращение для системы').AsString()\n        k = '04'\n        if len(nameSystem) < 5 and adskZavod != 'VENTZ':\n        \tk = '1'\n        \telement.GetParameters('BH_обозн_сист')[0].Set(sokrNameSystem)\n        \tk = '2'\n        elif adskZavod == 'VENTZ':\n        \tk = '3'\n        \telement.GetParameters('BH_обозн_сист')[0].Set(nameSystem.replace(\"_\", \" \"))\n        \tk = '4'\n        elif len(nameSystem) > 5:\n        \tk = '5'\n        \telement.GetParameters('BH_обозн_сист')[0].Set(nameTypeFamily)       \n    except:\n        bag.append(element.Name + \" не имеет параметра 'Имя системы'\" + ' ' + k)\n        bag.append(element.Id)\nTransactionManager.Instance.TransactionTaskDone()\n\n\nOUT = bag",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "6195822564fe40d2a21d1c728e6341a8",
+      "Inputs": [
+        {
+          "Id": "9cada214ccfe4fda8e1a9fd8ec850649",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c8671b260e7a44a5b20e6681f9870042",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bf5030d09b014d48afa9ee8b3cfd7204",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c50379df4ee548769bed87b092570b8f",
+      "Inputs": [
+        {
+          "Id": "825e69dec1a84c63848bc7ccee9effce",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00bcc74a35324b71b532dc74e736fa79",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSOffice.Data.ImportExcel@var,string,bool,bool",
+      "Id": "9d9a56133bf84b7dafe0f7762c0151a4",
+      "Inputs": [
+        {
+          "Id": "fafba9a8bd1745df8ac7766b8eb56d09",
+          "Name": "file",
+          "Description": "Файл книги Excel\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "38e9f584af974c5c91c933c30a9dea93",
+          "Name": "sheetName",
+          "Description": "Имя листа, в котором содержатся данные\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "eb612632ceba4558b817c6d9c6c715c7",
+          "Name": "readAsStrings",
+          "Description": "Переключатель для чтения ячеек по строкам\n\nbool\nЗначение по умолчанию : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e4420e352f6e41d599e6aca20a8211a5",
+          "Name": "showExcel",
+          "Description": "Переключатель для отображения главного окна Excel\n\nbool\nЗначение по умолчанию : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "39bf3b6b2b91467197334fb8ada4b3a9",
+          "Name": "data",
+          "Description": "Строки с данными из листа Excel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Чтение данных из электронной таблицы Microsoft Excel. Данные считываются по строкам и возвращаются в виде наборов списков по строкам. Для индексов строк и столбцов предусмотрено нулевое значение. Например, значение в ячейке A1 будет отображаться в списке данных как [0; 0]. Для работы с данным узлом потребуется установленное приложение Microsoft Excel.\n\nData.ImportExcel (file: var, sheetName: string, readAsStrings: bool = false, showExcel: bool = true): var[][]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": null,
+      "InputValue": "..\\..\\01_Входящие\\01_КО_931-S_СУРГУТ_ЛАБОРАТОРИЯ_ПРОЕКТИРОВАНИЕ_СТАДИЯ\\new_step_170124\\ОВ2\\DWG\\2024.01.22\\Оборудование\\02_HT_Сургут_ХОВС для экспорта.xlsm",
+      "NodeType": "ExtensionNode",
+      "Id": "7e8936c3dbe74471be44ce8e2957e200",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3edd40add97c4ac38b51c50bc8ad6cbc",
+          "Name": "",
+          "Description": "Путь к файлу",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Возможность выбрать файл в системе и получить путь к нему."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "5a28e7eacc024aa897a3082396f60a0a",
+      "Inputs": [
+        {
+          "Id": "4c19f76060ac48cfacbef504704340b1",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9630f433bbfc4917bfd301e462a1ca93",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "463caff2e0d74a6887dccbf7f14b3bff",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9d34eb91b8a34f9288bc45f066c8a8da",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "5a7c776a6db0427f8da73f2df23925e3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "adaaded395db4eb6bfe6df1b35dc7229",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "ХОВС_НА ПЕЧАТЬ",
+      "Id": "031ac329db364ef4868b93d1ed1f8697",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "26152843d3994a64a163684a1169ad9a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.FileObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "97d169f3770047b08c91d7040320b621",
+      "Inputs": [
+        {
+          "Id": "c33c273f8e5a4fccb9926f44a7913e04",
+          "Name": "path",
+          "Description": "Путь к файлу в виде строки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3da869698b734dfcb9bba9ea4dbc1c79",
+          "Name": "file",
+          "Description": "Файловый объект",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание нового объекта на основе пути."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\n#---------------------------------\n\n\nexelList=UnwrapElement(IN[1])\n\n\n#---------------------------------\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n#groups = doc.Settings.Categories\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n#The inputs to this node will be stored as a list in the IN variable.\n#---------------------------------\n\n#categoriesSTR = UnwrapElement(IN[1])\n\n\n\n#--------------------------------\n\"\"\"\ncollector = Autodesk.Revit.DB.FilteredElementCollector(doc)\nmachinefilter = ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\nmas=collector.WherePasses(machinefilter).WhereElementIsNotElementType().ToElements()\n\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nbag=[]\n\n\n\nfor element in mas:\n\n\ttry:\n\t\tnameSystem = element.LookupParameter('Имя системы').AsString\n\t\ttry:\n\t\t\telement.GetParameters('BH_обозн_сист')[0].Set(element.Name)\n\t\texcept:\n\t\t\tbag.append(element.Name)\n\texcept:\n\t\tbag.append(1)\n\t\t\n\nTransactionManager.Instance.TransactionTaskDone()\n\"\"\"\nb = exelList[8][4]\nresultList2 = [row for row in exelList if row[4] == \"1\" or row[4] == b or row[4] == \"2\"]\nresultList = []\nfor i in resultList2:\n\t\n\tresultList.append(i[3])\n\nOUT = resultList",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "192f76f288c843b6a80dc42724eb5b38",
+      "Inputs": [
+        {
+          "Id": "4f14d28a9ff34b7ea98e33d5d27888d7",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d05b37e630aa4319b0e6f07033a430bf",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4c95af7cce2d4c53a4f82eb4a79d8ed7",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "1dadb79ed86f42fa8077987095fbfe38",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "193a90b5aa564f7e9672c10788904531",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "b33659eb688d4cb5b1d7259ee0c721ee",
+      "Inputs": [
+        {
+          "Id": "c0987a4697594206af4460fbaea75822",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2031ea0660a645789a854627e71220a6",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n#groups = doc.Settings.Categories\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n#The inputs to this node will be stored as a list in the IN variable.\n#---------------------------------\n\n#categoriesSTR = UnwrapElement(IN[1])\n\n\n\n#--------------------------------\n\ncollector = Autodesk.Revit.DB.FilteredElementCollector(doc)\nmachinefilter = ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\nmas=collector.WherePasses(machinefilter).WhereElementIsNotElementType().ToElements()\n\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nbag=[]\n\nfor element in mas:\n    try:\n        nameSystemParam = element.LookupParameter('Имя системы')\n        if nameSystemParam:\n            nameSystem = nameSystemParam.AsString()\n            if len(nameSystem) < 7:\n                try:\n                    element.GetParameters('BH_обозн_сист')[0].Set(nameSystem.replace(\"_\", \" \"))\n                except:\n                    bag.append(element.Name)\n                    bag.append(element.Id)\n            elif len(nameSystem) > 7:\n                bh = \"ПВ\"+ ' ' + nameSystem[2:3]\n                try:\n                    element.GetParameters('BH_обозн_сист')[0].Set(bh)\n                except:\n                    bag.append(element.Name)\n                    bag.append(element.Id)\n        else:\n            bag.append(element.Name + \" не имеет параметра 'Имя системы'\")\n    except Exception as e:\n        bag.append(str(e))\nOUT = bag",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "c87d49cfdde34a95a9f4bfb8cf047f6f",
+      "Inputs": [
+        {
+          "Id": "a8c1b5e290304cbe9520a1b77e77eec0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9d249024096848bc8a3606c933fabdf2",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "bf5030d09b014d48afa9ee8b3cfd7204",
+      "End": "9cada214ccfe4fda8e1a9fd8ec850649",
+      "Id": "64ee32da0c464891aa40ca2ffb94564b"
+    },
+    {
+      "Start": "bf5030d09b014d48afa9ee8b3cfd7204",
+      "End": "a8c1b5e290304cbe9520a1b77e77eec0",
+      "Id": "7db8d8d59d5945a2917cf7cc3b3cad6e"
+    },
+    {
+      "Start": "39bf3b6b2b91467197334fb8ada4b3a9",
+      "End": "4c19f76060ac48cfacbef504704340b1",
+      "Id": "5badb0f5bf4245b19ef1a588a6c47159"
+    },
+    {
+      "Start": "3edd40add97c4ac38b51c50bc8ad6cbc",
+      "End": "c33c273f8e5a4fccb9926f44a7913e04",
+      "Id": "056935d3a79849e3af64e9110b77e8d9"
+    },
+    {
+      "Start": "9630f433bbfc4917bfd301e462a1ca93",
+      "End": "d05b37e630aa4319b0e6f07033a430bf",
+      "Id": "3bcdda3b8365459e911f620581076505"
+    },
+    {
+      "Start": "9d34eb91b8a34f9288bc45f066c8a8da",
+      "End": "e4420e352f6e41d599e6aca20a8211a5",
+      "Id": "c2cf6922d9864497b0749c6765c8e9a8"
+    },
+    {
+      "Start": "adaaded395db4eb6bfe6df1b35dc7229",
+      "End": "eb612632ceba4558b817c6d9c6c715c7",
+      "Id": "d2c7f2ba9b68428aab3fbe12cdbf055f"
+    },
+    {
+      "Start": "26152843d3994a64a163684a1169ad9a",
+      "End": "38e9f584af974c5c91c933c30a9dea93",
+      "Id": "a71364b2999a4e29ab970d7f7fb5f554"
+    },
+    {
+      "Start": "3da869698b734dfcb9bba9ea4dbc1c79",
+      "End": "fafba9a8bd1745df8ac7766b8eb56d09",
+      "Id": "e4ff8740c9234714bcd93ad00821f880"
+    },
+    {
+      "Start": "4c95af7cce2d4c53a4f82eb4a79d8ed7",
+      "End": "c0987a4697594206af4460fbaea75822",
+      "Id": "003d12be9d7948e6bacee1c30804e896"
+    },
+    {
+      "Start": "193a90b5aa564f7e9672c10788904531",
+      "End": "4f14d28a9ff34b7ea98e33d5d27888d7",
+      "Id": "f73a2cb7d7984d71b914fb936525ac89"
+    },
+    {
+      "Start": "9d249024096848bc8a3606c933fabdf2",
+      "End": "825e69dec1a84c63848bc7ccee9effce",
+      "Id": "6a36a94dd3e94e93b6388e424658f59d"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6195822564fe40d2a21d1c728e6341a8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 485.58767918737095,
+        "Y": -91.558524059006388
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "9c900a0760cd47d3834a885e8174fc9f",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 169.39171640462712,
+        "Y": -68.654181927313175
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "c50379df4ee548769bed87b092570b8f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 655.9660187973476,
+        "Y": 60.395480160878833
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Data.ImportExcel",
+        "Id": "9d9a56133bf84b7dafe0f7762c0151a4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 640.31961128955629,
+        "Y": -622.84515728533574
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "7e8936c3dbe74471be44ce8e2957e200",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 16.300675421975257,
+        "Y": -680.33205601529846
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "5a28e7eacc024aa897a3082396f60a0a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 921.208570712469,
+        "Y": -613.8020641329407
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "463caff2e0d74a6887dccbf7f14b3bff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 298.05025232853751,
+        "Y": -380.13364710225824
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "5a7c776a6db0427f8da73f2df23925e3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 297.12584287024407,
+        "Y": -454.856063948983
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "031ac329db364ef4868b93d1ed1f8697",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 225.72637164641162,
+        "Y": -542.00144477389108
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File From Path",
+        "Id": "97d169f3770047b08c91d7040320b621",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 497.59937372900771,
+        "Y": -766.57743559976313
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "192f76f288c843b6a80dc42724eb5b38",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1208.1686279135597,
+        "Y": -315.52243803991018
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "1dadb79ed86f42fa8077987095fbfe38",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 783.87436404895607,
+        "Y": -241.62710260890242
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "b33659eb688d4cb5b1d7259ee0c721ee",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1462.6508236171144,
+        "Y": -412.36905511905661
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "c87d49cfdde34a95a9f4bfb8cf047f6f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 365.39048781690485,
+        "Y": 201.0754739791966
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "882940ea3152438db957abcbd3f3aec1",
+        "Title": "Штамп",
+        "Nodes": [
+          "576a7120f9b74dd8bf5f8ce827e1f413",
+          "12e10b1df2c74472a55e4633c3945edf"
+        ],
+        "Left": -148.18498092623008,
+        "Top": -275.04944671851052,
+        "Width": 614.516141162481,
+        "Height": 174.6,
+        "FontSize": 36.0,
+        "InitialTop": -221.84944671851053,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "576a7120f9b74dd8bf5f8ce827e1f413",
+        "Title": "Скрипт предназначен для установки всем элементам ОВ2 уровень 1 этажа (для Собяниной Н.П.)",
+        "Nodes": [],
+        "Left": 166.73116023625084,
+        "Top": -218.12545307562345,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "12e10b1df2c74472a55e4633c3945edf",
+        "Title": "Script Name: Высотная отметка ОВ2 rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/27 09:54",
+        "Nodes": [],
+        "Left": -138.18498092623008,
+        "Top": -221.84944671851053,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 258.60375153615632,
+    "Y": 297.38589177224287,
+    "Zoom": 0.36033707472523796
+  }
+}

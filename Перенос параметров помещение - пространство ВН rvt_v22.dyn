@@ -1,0 +1,403 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Перенос параметров помещение - пространство ВН rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "60c4242edcf444c2a158606c70734502",
+      "Name": "Categories",
+      "Type": "dropdownSelection",
+      "Value": "OST_MEPSpaces",
+      "Description": "Все предопределенные категории.",
+      "SelectedIndex": 542
+    },
+    {
+      "Id": "23d85d08c8fb4f2d93dce8007c6d2a45",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\r\nimport sys\r\nimport clr\r\n\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference('RevitAPI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\n# ----------------------------------------------\r\n\r\n# Введенные в этом узле данные сохраняются в виде списка в переменных IN.\r\ndataEnteringNode = IN\r\ncat = UnwrapElement(IN[0])\r\n\r\n# Разместите код под этой строкой\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nkoef = 0.3048 * 0.3048  # перевод кв. футы в кв. м.\r\nkf3 = 0.3048 * 0.3048 * 0.3048  # перевод куб. футы в куб. м.\r\nkf = 0.3048  # перевод футы в м.\r\nel = FilteredElementCollector(doc).OfCategoryId(cat.Id).WhereElementIsNotElementType().ToElements()\r\nerror = []\r\n\r\nchange_param = []\r\nfor i in el:\r\n    # _________\r\n    shorttimepar1 = i.GetParameters(\"Номер помещения\")[0].AsString()\r\n    i.GetParameters(\"ВН_номер_помещения_текст\")[0].Set(shorttimepar1)\r\n    # _________\r\n    shorttimepar2 = i.GetParameters(\"Имя помещения\")[0].AsString()\r\n    i.GetParameters(\"ВН_наим_помещ\")[0].Set(shorttimepar2)\r\n    # ________\r\n    shorttimepar3 = i.GetParameters(\"Площадь\")[0].AsDouble()\r\n    shorttimepar3_1 = round(shorttimepar3 * koef, 1)\r\n    change_param.append(shorttimepar3_1)\r\n    try:\r\n        i.LookupParameter(\"BH_площадь\").Set(shorttimepar3_1)\r\n        # i.LookupParameter(\"Комментарии\").Set(str(i.LookupParameter(\"BH_площадь\").AsDouble()))\r\n    except:\r\n        #error.append(i)\r\n        pass\r\n    # ____________\r\n    shorttimepar4 = i.GetParameters(\"Полная высота\")[0].AsDouble()\r\n    i.GetParameters(\"ВН_высота\")[0].Set(shorttimepar4 * kf)\r\n    # ________\r\n    shorttimepar5 = i.GetParameters(\"Объем\")[0].AsDouble()\r\n    shorttimepar5_1 = round(shorttimepar5 * kf3, 1)\r\n    i.GetParameters(\"ВН_объем_помещения\")[0].Set(shorttimepar5_1)\r\n\r\n    # _______________\r\n    if len(str(i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble())) > 4:\r\n    \ti.GetParameters(\"ВН_тр_кр_приток\")[0].Set(0)\r\n    if len(str(i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble())) > 4:\r\n    \ti.GetParameters(\"ВН_тр_кр_вытяжка\")[0].Set(0)\r\n\ttry:\r\n\t    if (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() == 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() == 1):\r\n\t        shorttimepar6 = i.GetParameters(\"ВН_приток_всего\")[0].AsDouble() / (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n\t        shorttimepar6_1 = round(shorttimepar6, 1)\r\n\t        \r\n\t        i.GetParameters(\"ВН_тр_кр_приток\")[0].Set(shorttimepar6_1)\r\n\t        error.append(type(shorttimepar6_1))\r\n\t    elif (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() != 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() != 1):\r\n\t        shorttimepar6 = i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() * (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n\t        shorttimepar6_1 = round(shorttimepar6, 1)\r\n\t        i.GetParameters(\"ВН_приток_всего\")[0].Set(shorttimepar6_1)\r\n\t    elif (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() != 0) and (i.GetParameters(\"ВН_приток_всего\")[0].AsDouble() != 0):\r\n\t        pass\r\n    except:\r\n        pass\r\n\r\n    # _________\r\n    if (i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() == 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() == 1):\r\n        shorttimepar7 = i.GetParameters(\"ВН_вытяжка_всего\")[0].AsDouble() / (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n        shorttimepar7_1 = round(shorttimepar7, 1)\r\n        \r\n        i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].Set(shorttimepar7_1)\r\n        error.append(shorttimepar7_1)\r\n    elif (i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() != 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() != 1):\r\n        shorttimepar7 = i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() * (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n        shorttimepar7_1 = round(shorttimepar7, 1)\r\n        #error.append(shorttimepar7_1)\r\n        i.GetParameters(\"ВН_вытяжка_всего\")[0].Set(shorttimepar7_1)\r\n    elif (i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() != 0) and (i.GetParameters(\"ВН_вытяжка_всего\")[0].AsDouble() != 0):\r\n        pass\r\n\t\r\n# _________\r\n\"\"\"\r\nt = el[0].GetParameters(\"ВН_номер_помещения\")[0]\r\nt2 = t.Set(333)\r\nt1=dir(t2)\r\n\"\"\"\r\nTransactionManager.Instance.ForceCloseTransaction()\r\nOUT = error",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "71a0cc025e55490197f4e89402cf038f",
+      "Inputs": [
+        {
+          "Id": "021f644786044c3289a6555f63e5a4e5",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "deeeda977e7d428bb7d628e518297745",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "17b149ae4c624994b4c7f710222174b1",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 542,
+      "SelectedString": "OST_MEPSpaces",
+      "NodeType": "ExtensionNode",
+      "Id": "60c4242edcf444c2a158606c70734502",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "376d9194b12d49f7b143a6acd6aa0d72",
+          "Name": "Category",
+          "Description": "Выбранная категория.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Все предопределенные категории."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "f1d2e34b0e514cf9bd1f253f4dddb662",
+      "Inputs": [
+        {
+          "Id": "1a827bace9bf48a3be731ac024c77536",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3d815dba5f9844f9a3fafbfe40ee7357",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "0e34f7013d05441a93f660a479b8cd13",
+      "Inputs": [
+        {
+          "Id": "da6d9565d85b49b78862a52dbd552978",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "14b4d520785a443b880e36286bc517f5",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "23d85d08c8fb4f2d93dce8007c6d2a45",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "71b4aa0f1e074bd7ae741ef97f0ec849",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\r\nimport sys\r\nimport clr\r\n\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference('RevitAPI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\n# ----------------------------------------------\r\n\r\n# Введенные в этом узле данные сохраняются в виде списка в переменных IN.\r\ndataEnteringNode = IN\r\ncat = UnwrapElement(IN[0])\r\n\r\n# Разместите код под этой строкой\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nkoef = 0.3048 * 0.3048  # перевод кв. футы в кв. м.\r\nkf3 = 0.3048 * 0.3048 * 0.3048  # перевод куб. футы в куб. м.\r\nkf = 0.3048  # перевод футы в м.\r\nel = FilteredElementCollector(doc).OfCategoryId(cat.Id).WhereElementIsNotElementType().ToElements()\r\nerror = []\r\n\r\nchange_param = []\r\nfor i in el:\r\n    # _________\r\n    shorttimepar1 = i.GetParameters(\"Номер помещения\")[0].AsString()\r\n    i.GetParameters(\"ВН_номер_помещения_текст\")[0].Set(shorttimepar1)\r\n    # _________\r\n    shorttimepar2 = i.GetParameters(\"Имя помещения\")[0].AsString()\r\n    i.GetParameters(\"ВН_наим_помещ\")[0].Set(shorttimepar2)\r\n    # ________\r\n    shorttimepar3 = i.GetParameters(\"Площадь\")[0].AsDouble()\r\n    shorttimepar3_1 = round(shorttimepar3 * koef, 1)\r\n    change_param.append(shorttimepar3_1)\r\n    try:\r\n        i.LookupParameter(\"BH_площадь\").Set(shorttimepar3_1)\r\n        # i.LookupParameter(\"Комментарии\").Set(str(i.LookupParameter(\"BH_площадь\").AsDouble()))\r\n    except:\r\n        #error.append(i)\r\n        pass\r\n    # ____________\r\n    shorttimepar4 = i.GetParameters(\"Полная высота\")[0].AsDouble()\r\n    i.GetParameters(\"ВН_высота\")[0].Set(shorttimepar4 * kf)\r\n    # ________\r\n    shorttimepar5 = i.GetParameters(\"Объем\")[0].AsDouble()\r\n    shorttimepar5_1 = round(shorttimepar5 * kf3, 1)\r\n    i.GetParameters(\"ВН_объем_помещения\")[0].Set(shorttimepar5_1)\r\n\r\n    # _______________\r\n    if len(str(i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble())) > 4:\r\n        i.GetParameters(\"ВН_тр_кр_приток\")[0].Set(0)\r\n    if len(str(i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble())) > 4:\r\n        i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].Set(0)\r\n    try:\r\n        if (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() == 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() == 1):\r\n            shorttimepar6 = i.GetParameters(\"ВН_приток_всего\")[0].AsDouble() / (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n            shorttimepar6_1 = round(shorttimepar6, 1)\r\n            \r\n            i.GetParameters(\"ВН_тр_кр_приток\")[0].Set(shorttimepar6_1)\r\n            error.append(type(shorttimepar6_1))\r\n        elif (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() != 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() != 1):\r\n            shorttimepar6 = i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() * (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n            shorttimepar6_1 = round(shorttimepar6, 1)\r\n            i.GetParameters(\"ВН_приток_всего\")[0].Set(shorttimepar6_1)\r\n        elif (i.GetParameters(\"ВН_тр_кр_приток\")[0].AsDouble() != 0) and (i.GetParameters(\"ВН_приток_всего\")[0].AsDouble() != 0):\r\n            pass\r\n    except:\r\n        pass\r\n\r\n    # _________\r\n    if (i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() != 0) or (i.GetParameters(\"ВН_кратность_или_пр-выт\")[0].AsInteger() != 1):\r\n        shorttimepar7 = i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() * (i.GetParameters(\"Объем\")[0].AsDouble() * kf3)\r\n        shorttimepar7_1 = round(shorttimepar7, 1)\r\n        #error.append(shorttimepar7_1)\r\n        i.GetParameters(\"ВН_вытяжка_всего\")[0].Set(shorttimepar7_1)\r\n    elif (i.GetParameters(\"ВН_тр_кр_вытяжка\")[0].AsDouble() != 0) and (i.GetParameters(\"ВН_вытяжка_всего\")[0].AsDouble() != 0):\r\n        pass\r\n\t\r\n# _________\r\n\"\"\"\r\nt = el[0].GetParameters(\"ВН_номер_помещения\")[0]\r\nt2 = t.Set(333)\r\nt1=dir(t2)\r\n\"\"\"\r\nTransactionManager.Instance.ForceCloseTransaction()\r\nOUT = error\r\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "0c4bd51899244596ae0ef5df6f0e24d5",
+      "Inputs": [
+        {
+          "Id": "d9baa006efe9413cb1cbe67df340c10e",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "403244a6236c4189ab2260e404697d92",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9e696a7e87674ff5940c3dd7be8b0d20",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "376d9194b12d49f7b143a6acd6aa0d72",
+      "End": "da6d9565d85b49b78862a52dbd552978",
+      "Id": "25dcae9bd95b484bbfdc2d03548067c3"
+    },
+    {
+      "Start": "14b4d520785a443b880e36286bc517f5",
+      "End": "021f644786044c3289a6555f63e5a4e5",
+      "Id": "a3718fe8a3d1429698d53d26d6482476"
+    },
+    {
+      "Start": "14b4d520785a443b880e36286bc517f5",
+      "End": "d9baa006efe9413cb1cbe67df340c10e",
+      "Id": "718dde7657ad475ab8a1a9d1f496bc20"
+    },
+    {
+      "Start": "71b4aa0f1e074bd7ae741ef97f0ec849",
+      "End": "deeeda977e7d428bb7d628e518297745",
+      "Id": "f87ff215384844ebb5c9729e37a673a1"
+    },
+    {
+      "Start": "71b4aa0f1e074bd7ae741ef97f0ec849",
+      "End": "403244a6236c4189ab2260e404697d92",
+      "Id": "7bac728e12d74ac7a0bccb18e189a1f4"
+    },
+    {
+      "Start": "9e696a7e87674ff5940c3dd7be8b0d20",
+      "End": "1a827bace9bf48a3be731ac024c77536",
+      "Id": "68d1cc3ee1184f41bf1dd0e438be7a59"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -21.039352416992188,
+      "EyeY": 25.947177886962891,
+      "EyeZ": 48.727836608886719,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "71a0cc025e55490197f4e89402cf038f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 1029.7487957625308,
+        "Y": 133.82599156852064
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "60c4242edcf444c2a158606c70734502",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 253.04771944752576,
+        "Y": 225.13907924278038
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "f1d2e34b0e514cf9bd1f253f4dddb662",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1265.0551056119984,
+        "Y": 333.2903994641631
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "0e34f7013d05441a93f660a479b8cd13",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 607.94849476493482,
+        "Y": 229.97694527528927
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "23d85d08c8fb4f2d93dce8007c6d2a45",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 328.59556285815478,
+        "Y": 475.66552821744256
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "0c4bd51899244596ae0ef5df6f0e24d5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 649.63383988318412,
+        "Y": 694.24803624784818
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "1db23ae9165c49498fc0c79e383188f9",
+        "Title": "Штамп",
+        "Nodes": [
+          "87a9369d378c499283b7dc379e2f8d90",
+          "63e15280fbab495dac322d5bbe84ec96"
+        ],
+        "Left": -147.7209506919553,
+        "Top": -91.517169042022786,
+        "Width": 614.51614116248072,
+        "Height": 189.0,
+        "FontSize": 36.0,
+        "InitialTop": -38.317169042022783,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "87a9369d378c499283b7dc379e2f8d90",
+        "Title": "Скрипт предназначен для заполнения параметров ВН пространства для спецификации",
+        "Nodes": [],
+        "Left": 167.1951904705254,
+        "Top": -34.5931753991357,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "63e15280fbab495dac322d5bbe84ec96",
+        "Title": "Script Name: Перенос параметров помещение - пространство ВН rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/27 9:43",
+        "Nodes": [],
+        "Left": -137.7209506919553,
+        "Top": -38.317169042022783,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 175.24899850775478,
+    "Y": -58.350685816648479,
+    "Zoom": 1.0317861854263657
+  }
+}

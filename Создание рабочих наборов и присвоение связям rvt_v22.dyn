@@ -1,0 +1,245 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Создание рабочих наборов и присвоение связям rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n\n#The inputs to this node will be stored as a list in the IN variable.\ndataEnteringNode = IN\n#-----------\nName_STR =  [\n\t\t\t\"АИ\",\"АР\",\"ВК\",\"КЖ\",\"КМ\",\"КР\",\"ОВ1\",\"ОВ2\",\"СС\",\"ТХ\",\"ЭОМ\",\n\t\t\t\"AI\",\"AR\",\"VK\",\"KJ\",\"KM\",\"KR\",\"OV1\",\"OV2\",\"SS\",\"TH\",\"EOM\",\"МГС\",\"АУПТ\"\n\t\t\t\n\t\t\t\n\t\t\t#\"АР\",\"КР\",\"ОВ1\",\"ОВ2\",\"СС\",\"ВК\",\"АУПТ\",\"ТС\",\"АПС\",\"ЭОМ\",\n\t\t\t#\"AR\",\"KR\",\"OV1\",\"OV2\",\"CC\",\"VK\",\"AUPT\",\"TC\",\"APS\",\"ЭОМ\",\"КМ\",\"КЖ\"\t\n\t\t\t\t]\nName_RAS = [\"#Связь_АИ\",\"#Связь_АР\",\"#Связь_ВК\",\"#Связь_КЖ\",\"#Связь_КМ\",\"#Связь_КР\",\"#Связь_ОВ1\",\"#Связь_ОВ2\",\"#Связь_СС\",\"#Связь_ТХ\",\"#Связь_ЭОМ\",\"#Связь_МГС\",\"#Связь_АУПТ\",\"#Связь\" ]\n\ndist=UnwrapElement(Name_STR)\ndata=UnwrapElement(Name_RAS)\n\n#---------------------------------\ntest=[]\ntest1=[]\ntest2 = []\n#--------------------------------\nworksetTable = doc.GetWorksetTable();\nactiveId = worksetTable.GetActiveWorksetId();\nworkset = worksetTable.GetWorkset(activeId);\nfwc=FilteredWorksetCollector(doc)\nworkset_pr=fwc.OfKind(workset.Kind)\n\ncollector = Autodesk.Revit.DB.FilteredElementCollector(doc)\nlinkInstances = collector.OfClass(Autodesk.Revit.DB.RevitLinkInstance)\n\nlinkDoc, linkName, linkPath = [], [], []\n\nTransactionManager.Instance.EnsureInTransaction(doc)\nfor linkName in data:\n\ttry:\n\t\ta = Workset.Create(doc,linkName)\n\t\ttest1.append(a)\n\texcept:\n\t\ttest.append(linkName)\nlinkDoc, linkName, linkPath = [], [], []\nworkset_svyz_id=0\nfor workset in workset_pr:\n\tif workset.Name==\"#Связь\":\n\t\tworkset_svyz_id=workset.Id\nfor inst in linkInstances:\n\tlinkDoc.append(inst.GetLinkDocument())\n\tlinkName.append(inst.Name)\n\tinst.GetParameters('Рабочий набор')[0].Set(int(str(workset_svyz_id)))\n      \t\t\t\t\t\n\ttry:\n\t\tlinkPath.append(inst.GetLinkDocument().PathName)\n\texcept:\n\t\tlinkPath.append(None)\n\t\tpass\n\tfor contaneName in dist:\t\n\t\tif inst.Name.Contains(contaneName):\n\t\t\tfor workset in workset_pr:\n\t\t\t\tif contaneName in workset.Name:\n\t\t\t\t\tinst.GetParameters('Рабочий набор')[0].Set(int(str(workset.Id)))\n\t\t\t\t\tbreak\n\t\t\n      \t\t\t\t\t\nTransactionManager.Instance.TransactionTaskDone()\t\t\t\t\t\n#t=i2.Id\n#t1=dir(t)\n\nOUT = workset_svyz_id #linkDoc, linkName, linkInstances, linkPath,pipe_ov1,fiting_ov1,accses_ov1",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "6195822564fe40d2a21d1c728e6341a8",
+      "Inputs": [
+        {
+          "Id": "9cada214ccfe4fda8e1a9fd8ec850649",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c8671b260e7a44a5b20e6681f9870042",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bf5030d09b014d48afa9ee8b3cfd7204",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c50379df4ee548769bed87b092570b8f",
+      "Inputs": [
+        {
+          "Id": "825e69dec1a84c63848bc7ccee9effce",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00bcc74a35324b71b532dc74e736fa79",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c8671b260e7a44a5b20e6681f9870042",
+      "End": "825e69dec1a84c63848bc7ccee9effce",
+      "Id": "d4a5ea46a106432ba88173cee84a2984"
+    },
+    {
+      "Start": "bf5030d09b014d48afa9ee8b3cfd7204",
+      "End": "9cada214ccfe4fda8e1a9fd8ec850649",
+      "Id": "cd80510c2c0d476db3b0bc4b1438c5a2"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6195822564fe40d2a21d1c728e6341a8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 691.773071475485,
+        "Y": 384.5787454950829
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "9c900a0760cd47d3834a885e8174fc9f",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 521.92846194208346,
+        "Y": 386.07160640627706
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "c50379df4ee548769bed87b092570b8f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1007.0320404984556,
+        "Y": 420.36811824262429
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "4e0240f692504ed087eb29bdf9f68a3d",
+        "Title": "Штамп",
+        "Nodes": [
+          "e1be2cd58c9a4353b84189acbb3e6743",
+          "9c5eda74b65d481a9375f9ab7ff0c12b"
+        ],
+        "Left": 194.92449955427031,
+        "Top": 151.30941935197004,
+        "Width": 590.9161411624807,
+        "Height": 189.00000000000003,
+        "FontSize": 36.0,
+        "InitialTop": 204.30941935197004,
+        "InitialHeight": 148.72399364288711,
+        "TextblockHeight": 43.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "e1be2cd58c9a4353b84189acbb3e6743",
+        "Title": "Скрипт предназначен для создания рабочих наборов и присвоения их связным файлам",
+        "Nodes": [],
+        "Left": 509.84064071675112,
+        "Top": 208.03341299485712,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "9c5eda74b65d481a9375f9ab7ff0c12b",
+        "Title": "Script Name: Создание рабочих наборов и присвоение связям rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/26 17:53",
+        "Nodes": [],
+        "Left": 204.92449955427031,
+        "Top": 204.30941935197004,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -299.12839319000176,
+    "Y": 120.02824209350845,
+    "Zoom": 0.48415498653945915
+  }
+}

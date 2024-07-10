@@ -1,0 +1,210 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "тест работа с параметрами ОВ2",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr, System\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nclr.AddReference(\"RevitServices\")\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nfrom System.Collections.Generic import List\r\nimport math\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nview = doc.ActiveView\r\n#-------------------------------------------------------------------\r\ncategory=[]\r\ncollector = FilteredElementCollector(doc)\r\neqipfilter = ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\r\n\r\n#________________________________________________________________\r\n\r\ncollector = FilteredElementCollector(doc)\r\nequpment = collector.WherePasses(eqipfilter).WhereElementIsNotElementType().ToElements()\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\ntest = []\r\n\r\n#mas=equpment[862].GetDependentElements(pipefit)\t\r\nfor i1 in equpment:\r\n\t\r\n\tSubEleemnt=i1.GetDependentElements(eqipfilter)\r\n\t#test.append(i1.LookupParameter('Имя системы').AsValueString())\r\n\t#test.append(i1)\r\n\tname=str(i1.LookupParameter('Имя системы').AsValueString())\r\n\ti1.LookupParameter('HT_ИмяСистемы').Set(str(i1.LookupParameter('Имя системы').AsValueString()))\r\n\tif len(SubEleemnt)>1 :\r\n\t\tfor j in SubEleemnt:\r\n\t\t\telement = doc.GetElement(j)\r\n\t\t\t\r\n\t\t\trez=element.LookupParameter('MVS_Имя_Системы').Set(name)\r\n\t\t\t\r\n\t\t\t\r\n\t\t\tn1=element.LookupParameter('MVS_Имя_Системы').AsString()\r\n\t\t\t\r\n\t\t\ttest.append([element,name,rez,n1])\r\n\t\t\t\"\"\"\r\n\t\t\ttry:\r\n\t\t\t\telement.LookupParameter('HT_ИмяСистемы').Set(str(i1.LookupParameter('Имя системы').AsValueString()))\r\n\t\t\texcept:\r\n\t\t\t\tbag.append(['LSR_Имя системы LSR_Тип системы',i])\r\n\r\n\t\r\n\"\"\"\t\t\t\t\t\r\n\r\n\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nt=test#equpment[862].GetDependentElements(pipefit)\r\nt1=dir(t)\r\nOUT=t",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "cfa48d04b4124a478c3a83c3c0f88637",
+      "Inputs": [
+        {
+          "Id": "cb68ccbc384a4f98a200a4e753af1532",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "547deb5c73b148e2ad48225521d8aff3",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "593dfb6d37b84202ab4bd26e587b8558",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8a9aa8a36bfa4903ae2601738204df3f",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "048f6923b65248ed918d13958f1697ab",
+      "Inputs": [
+        {
+          "Id": "79ba6a282c9a439dacb4e5ce459d7461",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d298451f8ae74171bcd9cb38fb83fb9f",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "",
+      "Id": "5170b4362ed143c68b390756511986a8",
+      "Inputs": [],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "547deb5c73b148e2ad48225521d8aff3",
+      "End": "79ba6a282c9a439dacb4e5ce459d7461",
+      "Id": "cd0bb93464f44af4882e3964c13da2d3"
+    },
+    {
+      "Start": "8a9aa8a36bfa4903ae2601738204df3f",
+      "End": "cb68ccbc384a4f98a200a4e753af1532",
+      "Id": "f4a081df93814dcb82382b9a222fe789"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "cfa48d04b4124a478c3a83c3c0f88637",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 955.2,
+        "Y": 416.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "593dfb6d37b84202ab4bd26e587b8558",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 702.40000000000009,
+        "Y": 441.6
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "048f6923b65248ed918d13958f1697ab",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1224.0,
+        "Y": 227.20000000000007
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "5170b4362ed143c68b390756511986a8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 637.0,
+        "Y": 183.0
+      }
+    ],
+    "Annotations": [],
+    "X": -646.303798958136,
+    "Y": 148.28853091242911,
+    "Zoom": 1.0542982150113263
+  }
+}

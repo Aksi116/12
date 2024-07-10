@@ -1,0 +1,263 @@
+{
+  "Uuid": "f8b070f2-4a02-42e5-a92f-1037e1329594",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Script удаления параметров",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\r\nimport clr\r\nclr.AddReference('RevitAPI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n\r\ndoc\t\t\t\t=\tDocumentManager.Instance.CurrentDBDocument\r\nuiapp\t\t\t=\tDocumentManager.Instance.CurrentUIApplication\r\napp\t\t\t\t=\tuiapp.Application\r\n# Введенные в этом узле данные сохраняется в виде списка в переменных IN.\r\ndataEnteringNode = IN\r\n\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nspElems = FilteredElementCollector(doc).OfClass(ParameterElement)\r\n\r\nseParam = []\r\n\r\nnameP = '11'\r\nfor i in spElems:\r\n    \r\n    defParameter = i.GetDefinition()\r\n    if defParameter.Name.startswith(nameP):\r\n        \r\n        seParam.append(i)\r\n\r\n        \r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\nn = 0\r\nwhile len(seParam) > n:\r\n    try:\r\n    \r\n        doc.Delete(seParam[n].Id)\r\n        n += 1\r\n    except:\r\n        pass\r\n\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\n# Назначьте вывод переменной OUT.\r\nOUT = seParam",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "8dbec85f455a4d0b86460615ba55ac21",
+      "Inputs": [
+        {
+          "Id": "58e1b1c108a747a88347866b3cde2a63",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6bec797b3f5c424994c1b21b91599cb6",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7ca39850d5c54ac391a7a9d4f75127f7",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "0c1a12aafbb6463b8f6318aa57867359",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "215eec3c14ed4ccaa22ef233f82af695",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "aafca71549864310abdf6b0fe85df869",
+      "Inputs": [
+        {
+          "Id": "240bec6e4cac407aa003ae860f41fb49",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "977f74f0b8a1407e99cb723c73a3b7fe",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7ca39850d5c54ac391a7a9d4f75127f7",
+      "End": "240bec6e4cac407aa003ae860f41fb49",
+      "Id": "ad82994ea06c45f1bf8ac0f4d0504799"
+    },
+    {
+      "Start": "215eec3c14ed4ccaa22ef233f82af695",
+      "End": "58e1b1c108a747a88347866b3cde2a63",
+      "Id": "6b66a227bfa24408a6d08761749f1d6d"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "8dbec85f455a4d0b86460615ba55ac21",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 300.00000000000011,
+        "Y": 256.48421335784712
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "0c1a12aafbb6463b8f6318aa57867359",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 91.199999999999989,
+        "Y": 265.6
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "aafca71549864310abdf6b0fe85df869",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 563.09219863970509,
+        "Y": 228.07549836090513
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "c3a538a9642446adbd8959d9269d4064",
+        "Title": "<Нажмите здесь, чтобы изменить заголовок группы>",
+        "Nodes": [
+          "8dbec85f455a4d0b86460615ba55ac21",
+          "0c1a12aafbb6463b8f6318aa57867359",
+          "aafca71549864310abdf6b0fe85df869"
+        ],
+        "Left": 81.199999999999989,
+        "Top": 131.67549836090512,
+        "Width": 701.49219863970507,
+        "Height": 373.8,
+        "FontSize": 36.0,
+        "InitialTop": 228.07549836090513,
+        "InitialHeight": 182.52450163909489,
+        "TextblockHeight": 86.4,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "7b695f529a134b9c94cb012379ee00e7",
+        "Title": "Штамп",
+        "Nodes": [
+          "8ac744cbb70f4b64a37806a9fbd6d1dd",
+          "4edd1e71be4645658c1d99455e08a6f8"
+        ],
+        "Left": -82.713964944433769,
+        "Top": -128.18942879452698,
+        "Width": 634.5139856636863,
+        "Height": 182.41839495188785,
+        "FontSize": 36.0,
+        "InitialTop": -74.989428794526987,
+        "InitialHeight": 152.81839495188785,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "8ac744cbb70f4b64a37806a9fbd6d1dd",
+        "Title": "Скрипт предназначен для удаления параметров с проекта",
+        "Nodes": [],
+        "Left": 245.80002071925253,
+        "Top": -74.989428794526987,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "4edd1e71be4645658c1d99455e08a6f8",
+        "Title": "Script Удаления параметров из проекта.dyn\n\nPackages used in this script: \n\n\nTimeStamp : 2024/7/6 8:1",
+        "Nodes": [],
+        "Left": -72.713964944433769,
+        "Top": -67.171033842639133,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 11.375694681508264,
+    "Y": 94.215884010614644,
+    "Zoom": 0.79439353292142412
+  }
+}

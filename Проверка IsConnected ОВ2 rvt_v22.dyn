@@ -1,0 +1,236 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Проверка IsConnected ОВ2 rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "dfb08e34dd194620b6d5a7e306723c55",
+      "Inputs": [
+        {
+          "Id": "a3a557c5224d41fd8a8bd77044421b41",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0e7ff6f95a30437fa7d091f7f4fb12a5",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Загрузить стандартную библиотеку Python и библиотеку DesignScript\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference('RevitAPI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nfrom System.Collections.Generic import List\r\n\r\n# Введенные в этом узле данные сохраняется в виде списка в переменных IN.\r\ndataEnteringNode = IN\r\n\r\n# Разместите код под этой строкой\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\n\r\nduct_f = ElementCategoryFilter(BuiltInCategory.OST_DuctTerminal)\r\ncollector = FilteredElementCollector(doc)\r\nduct = collector.WherePasses(duct_f).WhereElementIsNotElementType().ToElements()\r\nb1 = [] \r\nduct2 = True\r\nb = duct[0].MEPModel.ConnectorManager.Connectors\r\nfor i in b:\r\n\tb1.append(i)\r\n\tbreak\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nfor i in duct:\r\n    for j in i.MEPModel.ConnectorManager.Connectors:\r\n    \tduct2 = j.IsConnected\r\n    \tbreak\r\n    \r\n    if duct2 == False:\r\n    \t\r\n    \t\r\n    \t\r\n    \ti.LookupParameter('ADSK_Примечание').Set(\"1\")\r\n    \tb1.append(1)\t\r\n    else:\r\n    \ti.LookupParameter('ADSK_Примечание').Set(\"2\")\r\n\r\n    \r\n\r\nTransactionManager.Instance.ForceCloseTransaction()\r\n# Назначьте вывод переменной OUT.\r\nOUT = b1[0]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "9013e393c9fe49e39bd605de220e8732",
+      "Inputs": [
+        {
+          "Id": "dded16f3f83f4d9eaf858460f99799c6",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b9598cdd352148f8b91084ceb87bb75c",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "5ea8ee6946fd4f44a7167b55157efc26",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "54fe1e1616034ba897aa57af16d88a0d",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "b9598cdd352148f8b91084ceb87bb75c",
+      "End": "a3a557c5224d41fd8a8bd77044421b41",
+      "Id": "82e9b2ac1523482e942182ef91d02ccc"
+    },
+    {
+      "Start": "54fe1e1616034ba897aa57af16d88a0d",
+      "End": "dded16f3f83f4d9eaf858460f99799c6",
+      "Id": "aaee0f53d08a42879e98378509fed5b0"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "dfb08e34dd194620b6d5a7e306723c55",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1396.185322771596,
+        "Y": 492.87141309511162
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "9013e393c9fe49e39bd605de220e8732",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1193.6875266788727,
+        "Y": 590.28787864345088
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "5ea8ee6946fd4f44a7167b55157efc26",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 880.66795673300874,
+        "Y": 583.11430255727942
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "e20c3419e6044469ba37dda7f2d4a8a4",
+        "Title": "Штамп",
+        "Nodes": [
+          "1a5e8e7d75e249d99ec6c1cc8b583f55",
+          "b0a398f349024d7ab860dd58dca8c6e7"
+        ],
+        "Left": 616.96418334969667,
+        "Top": 300.42791343148855,
+        "Width": 544.91614116248093,
+        "Height": 174.59999999999997,
+        "FontSize": 36.0,
+        "InitialTop": 353.62791343148854,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "1a5e8e7d75e249d99ec6c1cc8b583f55",
+        "Title": "Скрипт предназначен для проверки присоединянения вентиляционного оборудования",
+        "Nodes": [],
+        "Left": 931.88032451217759,
+        "Top": 357.35190707437562,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "b0a398f349024d7ab860dd58dca8c6e7",
+        "Title": "Script Name: Проверка IsConnected ОВ2 rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/26 17:51",
+        "Nodes": [],
+        "Left": 626.96418334969667,
+        "Top": 353.62791343148854,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -371.98974737568267,
+    "Y": -122.91579658401099,
+    "Zoom": 1.0630504240578496
+  }
+}

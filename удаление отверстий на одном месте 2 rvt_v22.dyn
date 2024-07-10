@@ -1,0 +1,746 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "удаление отверстий на одном месте 2 rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "Math": {
+        "Key": "DSCore.Math",
+        "Value": "DSCoreNodes.dll"
+      },
+      "DSCore.List": {
+        "Key": "DSCore.List",
+        "Value": "DSCoreNodes.dll"
+      },
+      "Autodesk.Vector": {
+        "Key": "Autodesk.DesignScript.Geometry.Vector",
+        "Value": "ProtoGeometry.dll"
+      },
+      "Autodesk.DesignScript.Geometry.Vector": {
+        "Key": "Autodesk.DesignScript.Geometry.Vector",
+        "Value": "ProtoGeometry.dll"
+      },
+      "archilab.Elements": {
+        "Key": "archilab.Revit.Elements.Elements",
+        "Value": "archilab.dll"
+      },
+      "archilab.Revit.Elements.Elements": {
+        "Key": "archilab.Revit.Elements.Elements",
+        "Value": "archilab.dll"
+      },
+      "Category": {
+        "Key": "Revit.Elements.Category",
+        "Value": "RevitNodes.dll"
+      },
+      "Line": {
+        "Key": "Autodesk.DesignScript.Geometry.Line",
+        "Value": "ProtoGeometry.dll"
+      },
+      "Surface": {
+        "Key": "Autodesk.DesignScript.Geometry.Surface",
+        "Value": "ProtoGeometry.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Воздуховоды\";\n\"Трубы\";\n\"Кабельные лотки\";\n\"Уровни\";\n\"Телефонные устройства\";\n\"Соединительные детали трубопроводов\";\n\"Оборудование\";\n\"Линии\";\n\"Короба\";\n\"Сантехнические приборы\";\n\"Обобщенные модели\";",
+      "Id": "f1a0969f44ae4db4a8187e1f1922ced9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "659241063e4b4edc90cb257dafe8817c",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8efd243fcc1842fd964d12eabcd27f57",
+          "Name": "",
+          "Description": "Значение выражения в строке 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a5d8feba882f4faa8dc3bf31cec9dffd",
+          "Name": "",
+          "Description": "Значение выражения в строке 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cd1dd6e0c55346d79011e9be0c25d885",
+          "Name": "",
+          "Description": "Значение выражения в строке 4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "15ebf1a01bb24e01881c0160de46b09d",
+          "Name": "",
+          "Description": "Значение выражения в строке 5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9f6defde45154b8fb7b67f0342538831",
+          "Name": "",
+          "Description": "Значение выражения в строке 6",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5863952804e048ec95e664400775672e",
+          "Name": "",
+          "Description": "Значение выражения в строке 7",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d8cfcc0ac24c4f64bdecfaf8816bb5fb",
+          "Name": "",
+          "Description": "Значение выражения в строке 8",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a8f34edef1ab4f638b6aef9596b7db2e",
+          "Name": "",
+          "Description": "Значение выражения в строке 9",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "aca95342479745c3829ba2e9d9c52af7",
+          "Name": "",
+          "Description": "Значение выражения в строке 10",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "efe85cd6cabe4f349f1982646d5cc655",
+          "Name": "",
+          "Description": "Значение выражения в строке 11",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "a4c31544bc6b47dc870f5fcd3b25dafe",
+      "Inputs": [
+        {
+          "Id": "76e153f18863484594dbab5c3b344ccd",
+          "Name": "name",
+          "Description": "Предопределенное имя категории.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "eff4c74158be4b9c9af053b244c5b7f3",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Получение категории Revit по предустановленному имени категории.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "a93dbf4f1d5240fea4fd0c2021efc8f2",
+      "Inputs": [
+        {
+          "Id": "a444365ae7444973b15e95e8faa96032",
+          "Name": "Category",
+          "Description": "Категория",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "95a3184212284333a45902a591f2f9a4",
+          "Name": "Elements",
+          "Description": "Тип элемента.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Получение из модели всех элементов определенной категории."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "50ce8070288c4616b6f40a8e728846e8",
+      "Inputs": [
+        {
+          "Id": "05ef04bd267e4e8fb135bd63563ba6a3",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "912d22b9f3d04baab5aa48499372da31",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr, System\n\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.AddReference('RevitAPI')\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nclr.AddReference(\"RevitServices\")\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\nfrom System.Collections.Generic import List\nimport math\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\nview = doc.ActiveView\n\n\n#-------------------------------------------------------------------\n# Опции для работы функций\nopt = Options() # Для получения геометрии\noptS = SolidCurveIntersectionOptions() # Для нахождения пересечения объёмного тела с кривой\nnonStr = Autodesk.Revit.DB.Structure.StructuralType.NonStructural # Для вставки семейства в основу\n\n#----------------------------------------------------------\nopen_tel = UnwrapElement(IN[0])\n\n\ndmas=[]\nopmas=[]\nconnectors=[]\nunicmas=[]\npointcounty1=[]\n#Открыти транзакции----------------------------------------\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n#TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n\"\"\"\nfor duct in ducts:\n\tif str(duct.Id)=='1105959':\n\t\tdmas.append(duct)\n\"\"\"\t\t\nfor i in open_tel:\n\t\n\tdata=(i,i.Location.Point)\n\tunicmas.append(data)\n\tpointcounty1.append(i.Location.Point)\t\t\n\t\t\npointcounty=[]\nunique_numbers = set(pointcounty1)\nfor number in unique_numbers:\n\tpointcounty.append(number)\npointcounty.sort()\nmas1=[]\nmas2=[]\nfor i in pointcounty:\n\tfor j in unicmas:\n\t\tif str(j[1])==str(i):# and i.LookupParameter('GP_Opn_Габариты')==j[1].LookupParameter('GP_Opn_Габариты'):\n\t\t\tmas1.append(j[0])\n\tif len(mas1)>1:\n\t\tk=0\n\t\tfor i1 in mas1:\n\t\t\tif k!=0:\n\t\t\t\tmas2.append(i1)\n\t\t\tk=k+1\n\tmas1.Clear()\t\t\t\n\"\"\"\t\t\nfor i in dmas[0].ConnectorManager.Connectors:\n\tconnectors.append(i)\t\t\t\t\n#--------------------------------------------\n#newline=Line.CreateBound(new1, new2)\n\nzeropoint=XYZ(0,0,0)\n\nz1=opmas[0].Location.Point.Z\nequpment=dmas[0]\nboxmin=equpment.BoundingBox[view].Min\nboxminx=equpment.BoundingBox[view].Min.X\nboxminy=equpment.BoundingBox[view].Min.Y\nboxminz=equpment.BoundingBox[view].Min.Z\n\t\t\n#--------------------------------------------\nboxmax=equpment.BoundingBox[view].Max\nboxmaxx=equpment.BoundingBox[view].Max.X\nboxmaxy=equpment.BoundingBox[view].Max.Y\nboxmaxz=equpment.BoundingBox[view].Max.Z\n#--------------------------------------------\nboxcentx=(boxminx+boxmaxx)/2\nboxcenty=(boxminy+boxmaxy)/2\nboxcentz=(boxminz+boxmaxz)/2\nnewline3=Line.CreateBound(XYZ(boxminx,boxcenty,boxcentz),XYZ(boxmaxx,boxcenty,boxcentz))\nnewline4=Line.CreateBound(XYZ(boxcentx,boxminy,boxcentz),XYZ(boxcentx,boxmaxy,boxcentz))\nnewline1=Line.CreateBound(XYZ(boxminx,boxminy,opmas[0].Location.Point.Z),XYZ(boxmaxx,boxmaxy,opmas[0].Location.Point.Z))\nnewline2=Line.CreateBound(opmas[0].Location.Point,XYZ(100,0,opmas[0].Location.Point.Z))#dmas[0].Location.Curve.Origin\nend0 = newline3.GetEndPoint(0)\nend1 = newline3.GetEndPoint(1)\nx0_ = end0.X; y0_ = end0.Y;\tx1_ = end1.X; y1_ = end1.Y; z0_ = end0.Z; z1_ = end1.Z\nA2 = y0_-y1_; B2 = x1_-x0_; C2 = z1_-z0_\n\nendWall0 = newline2.GetEndPoint(0) # Получение начальной точки кривой\nendWall1 = newline2.GetEndPoint(1) # Получение конечной точки кривой\nx0 = endWall0.X; y0 = endWall0.Y; x1 = endWall1.X; y1 = endWall1.Y # Получение отдельных координат точек\nA1 = y0-y1;\tB1 = x1-x0 # Получение коэффициентов уравнения прямой\n\nD = ((A1**2 + B1**2)**0.5 * (A2**2 + B2**2)**0.5)\nif D != 0:\n\tcosin = (A1*A2 + B1*B2) / D # Вычисление косинуса между прямыми трубы и стены\n\tif math.fabs(cosin) <= 1:\n\t\tangleHor = math.degrees(math.acos(cosin))\t\t\n\n\t\t#newline3=Line.CreateBound(boxmin,boxmax)\nt=connectors[0].CoordinateSystem.BasisX\nt01=connectors[0].CoordinateSystem.BasisY\nt03=opmas[0].FacingOrientation.AngleTo(t)\nopmas[0].Location.Rotate(dmas[0].Location.Curve,(math.radians(90)+t03))#Location.Point.AngleOnPlaneTo(connectors[0].Origin,zeropoint)\n#.CoordinateSystem.BasisX.AngleTo(open_tel[1].Location.Point)\nt0=newline1.Direction#connectors[0].Origin.AngleTo(opmas[0].Location.Point)#.Rotate(dmas[0].Location.Curve,t)#Rotation#(dmas[0].Location.Curve,math.radians(47))#math.radians(47))\n#open_tel[1].Location.Rotate(dmas[0].Location.Curve,math.radians(angleHor))\n\n#ion#ducts[1011]#open_tel[37]#FacingOrientation#.AngleTo(ducts[1011].Location.Curve.GetEndPoint(1))#BasePoint #.BoundingBox[view]\nt1=dir(t)\t\n\"\"\"\nTransactionManager.Instance.TransactionTaskDone()\n\nOUT=mas2#t03,math.radians(132.19),t0,t01,t,t1#lst,lst2,openmas,rf,almasducts[1011]#",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "e120ffd443fa4fdcb6648494cc90e1e2",
+      "Inputs": [
+        {
+          "Id": "d58a6b5d60074d3b9af237af62f32a76",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c5ead1826f30449f8a2ab083236b9e85",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "34085c393adc40cd9ded32f85270881a",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "190a0cf5deb54464b1e6c3b0118c3ec4",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "d85594ad485442689f274d37d881e36f",
+      "Inputs": [
+        {
+          "Id": "106a3de5650542e788af798945cee2e0",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3def0c1bff614b53bb591564c0149f5b",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "86f72fdb5f14450288335cd1506bf636",
+      "Inputs": [
+        {
+          "Id": "2482de936b494076a1b8113dfea82344",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "134f72549e1246e691e4341d0ef7debf",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "881680c2ad4c424280df423f7669f00d",
+      "Inputs": [
+        {
+          "Id": "895268fad18d4ed9971322a0ddfce18a",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d32fb73256524b749a63f78a88961894",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"АР\";\n\"КР\";",
+      "Id": "914f12f5f3b44ae180f2a3348d4e6c21",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b1b37a1cedff4f928f206bfeb1e8acbe",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "180f151dbf224dae8e4b20749bf8616f",
+          "Name": "",
+          "Description": "Значение выражения в строке 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "59267f3a393e4e23b78714f95be37e20",
+      "Inputs": [
+        {
+          "Id": "633005e78e63456dbdc9dca016356f7b",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "98bac4fa761d463a960cbf979ff49dcc",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Delete@Revit.Elements.Element",
+      "Id": "499a3960aaa84105a30f8f59089e2737",
+      "Inputs": [
+        {
+          "Id": "5ce4fbb4c0044c858c9b7d8e71ad53a6",
+          "Name": "element",
+          "Description": "Элемент, который требуется удалить.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "05835ca7a6274d0d83362ef8b6e7a15d",
+          "Name": "int[]",
+          "Description": "Список идентификаторов удаленных элементов, включая все зависимые элементы.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Удаление элемента и всех полностью зависимых от него элементов.\n\nElement.Delete (element: Element): int[]"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "efe85cd6cabe4f349f1982646d5cc655",
+      "End": "76e153f18863484594dbab5c3b344ccd",
+      "Id": "7ba8ee89a06b457aa306124bb003584a"
+    },
+    {
+      "Start": "eff4c74158be4b9c9af053b244c5b7f3",
+      "End": "a444365ae7444973b15e95e8faa96032",
+      "Id": "8cc3f3f65c8d4564987529e4cfd05d8a"
+    },
+    {
+      "Start": "95a3184212284333a45902a591f2f9a4",
+      "End": "05ef04bd267e4e8fb135bd63563ba6a3",
+      "Id": "3bc71712b0754784b0082b52dbe31887"
+    },
+    {
+      "Start": "912d22b9f3d04baab5aa48499372da31",
+      "End": "2482de936b494076a1b8113dfea82344",
+      "Id": "2682de2219d040f998ff460ec578addf"
+    },
+    {
+      "Start": "190a0cf5deb54464b1e6c3b0118c3ec4",
+      "End": "633005e78e63456dbdc9dca016356f7b",
+      "Id": "8f7ed312f94b4bc981348723469ccdbe"
+    },
+    {
+      "Start": "190a0cf5deb54464b1e6c3b0118c3ec4",
+      "End": "5ce4fbb4c0044c858c9b7d8e71ad53a6",
+      "Id": "5d3f36ec49c241118f02f1ffa9902eaf"
+    },
+    {
+      "Start": "134f72549e1246e691e4341d0ef7debf",
+      "End": "d58a6b5d60074d3b9af237af62f32a76",
+      "Id": "e7aaf3841f3a4b5282df278a04ae7286"
+    },
+    {
+      "Start": "d32fb73256524b749a63f78a88961894",
+      "End": "c5ead1826f30449f8a2ab083236b9e85",
+      "Id": "3c9b9b82a68e405289bf00e3580708b9"
+    },
+    {
+      "Start": "b1b37a1cedff4f928f206bfeb1e8acbe",
+      "End": "34085c393adc40cd9ded32f85270881a",
+      "Id": "75ed21f526274d11b22552d4c316c3e3"
+    },
+    {
+      "Start": "05835ca7a6274d0d83362ef8b6e7a15d",
+      "End": "106a3de5650542e788af798945cee2e0",
+      "Id": "74db70394e4d47498bc47309b0a004b8"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 100.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": 34433.13671875,
+      "EyeY": 21983.91015625,
+      "EyeZ": 23889.865234375,
+      "LookX": 57.2119255065918,
+      "LookY": -34.763370513916016,
+      "LookZ": -74.0519790649414,
+      "UpX": 0.085087686777114868,
+      "UpY": 0.99026811122894287,
+      "UpZ": -0.11013280600309372
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "f1a0969f44ae4db4a8187e1f1922ced9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -130.60681002983551,
+        "Y": 3662.98913034048
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "a4c31544bc6b47dc870f5fcd3b25dafe",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 632.23939530827784,
+        "Y": 4113.8748570334683
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Отверстия",
+        "Id": "a93dbf4f1d5240fea4fd0c2021efc8f2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 858.520429686604,
+        "Y": 4113.2951958165595
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "50ce8070288c4616b6f40a8e728846e8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1313.9480016757259,
+        "Y": 4192.8544919613005
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Удаление копий",
+        "Id": "e120ffd443fa4fdcb6648494cc90e1e2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3559.18279886316,
+        "Y": 4255.1728676653865
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Оборудование",
+        "Id": "d85594ad485442689f274d37d881e36f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4127.4784361698476,
+        "Y": 4560.3598054503591
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "86f72fdb5f14450288335cd1506bf636",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1660.1844685861147,
+        "Y": 4189.0435345389269
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "881680c2ad4c424280df423f7669f00d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2547.0101135813998,
+        "Y": 4656.9749784269952
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "914f12f5f3b44ae180f2a3348d4e6c21",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3278.0219053284418,
+        "Y": 4431.2032145825369
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Оборудование",
+        "Id": "59267f3a393e4e23b78714f95be37e20",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3845.0968789828562,
+        "Y": 4121.4804824508137
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Delete",
+        "Id": "499a3960aaa84105a30f8f59089e2737",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3771.4564916253275,
+        "Y": 4770.1349713606169
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "48655c8d2e6444f39ad590062963179f",
+        "Title": "Отверстия(телефонные устройства)",
+        "Nodes": [
+          "a4c31544bc6b47dc870f5fcd3b25dafe",
+          "a93dbf4f1d5240fea4fd0c2021efc8f2"
+        ],
+        "Left": 622.23939530827784,
+        "Top": 4016.8951958165594,
+        "Width": 420.6810343783261,
+        "Height": 189.57966121690924,
+        "FontSize": 36.0,
+        "InitialTop": 4113.2951958165595,
+        "InitialHeight": 145.57966121690879,
+        "TextblockHeight": 86.4,
+        "Background": "#FF848484"
+      },
+      {
+        "Id": "13a5060f78ce4e1f80e7231a38f00a25",
+        "Title": "Штамп",
+        "Nodes": [
+          "d09afa63c02d489fb3791ff6a136a532",
+          "f43778109e9b4affbd2abe845b6939a1"
+        ],
+        "Left": 3301.1532589131248,
+        "Top": 3814.6527633928295,
+        "Width": 542.51614116248084,
+        "Height": 189.0,
+        "FontSize": 36.0,
+        "InitialTop": 3867.8527633928293,
+        "InitialHeight": 148.72399364288731,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "d09afa63c02d489fb3791ff6a136a532",
+        "Title": "Скрипт предназначен для удаления дублирующихся отверстий",
+        "Nodes": [],
+        "Left": 3616.0694000756057,
+        "Top": 3871.5767570357166,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "f43778109e9b4affbd2abe845b6939a1",
+        "Title": "Script Name: удаление отверстий на одном месте 2 rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/27 9:40",
+        "Nodes": [],
+        "Left": 3311.1532589131248,
+        "Top": 3867.8527633928293,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -302.90926199499108,
+    "Y": -792.39474824341619,
+    "Zoom": 0.23770289811048953
+  }
+}

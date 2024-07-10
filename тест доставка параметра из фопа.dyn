@@ -1,0 +1,190 @@
+{
+  "Uuid": "ce5f1d2a-a8bc-475b-ba1f-1a2bc7b2cb0c",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "тест доставка параметра из фопа",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "6d5374018c504940adf7be97896a4da7",
+      "Inputs": [
+        {
+          "Id": "c7ce8704e2d846c88dd62601707e7ae5",
+          "Name": "",
+          "Description": "Узел для отображения выходных данных",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b32a8337fcc34b9489e1d30a79c642a7",
+          "Name": "",
+          "Description": "Выходные данные узла",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitServices')\r\nfrom Autodesk.Revit.DB import *\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nsharedParamsFile = doc.Application.SharedParametersFilename\r\n\r\n# ФОП\r\nparamFile = doc.Application.OpenSharedParameterFile()\r\n\r\n\r\ndef findParameter(paramName):\r\n    for group in paramFile.Groups:\r\n        for definition in group.Definitions:\r\n            if definition.Name == paramName:\r\n                return definition\r\n    return None\r\n\r\n\r\ndef parameterExistsInFamily(paramName):\r\n    for param in doc.FamilyManager.GetParameters():\r\n        if param.Definition.Name == paramName:\r\n            return param\r\n    return None\r\n\r\n\r\nparameters_to_add = [\r\n    'HT_ТХ ТЗ МГ',\r\n    'HT_ТХ ТЗ ОВИК',\r\n    'HT_ТХ ТЗ СС',\r\n    'HT_ТХ ТЗ ЭОМ',\r\n    'HT_ТХ_Раздел шаблона',\r\n    'HT_ТХ_ТЗ ВК'\r\n]\r\n\r\nresults = []  \r\n\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\ntry:\r\n    for paramName in parameters_to_add:\r\n        \r\n        familyParam = parameterExistsInFamily(paramName)\r\n        if familyParam is not None:\r\n            results.append(f\"Параметр '{paramName}' уже существует в семействе.\")\r\n            continue\r\n        \r\n        \r\n        parameterDef = findParameter(paramName)\r\n        \r\n        \r\n        if parameterDef is None:\r\n            results.append(f\"Параметр '{paramName}' не найден в файле общих параметров\")\r\n            continue\r\n        \r\n        \r\n        isInstance = False  \r\n        \r\n        \r\n        result = doc.FamilyManager.AddParameter(parameterDef, BuiltInParameterGroup.PG_TEXT, isInstance)\r\n        if result:\r\n            results.append(f\"Параметр '{paramName}' успешно добавлен как параметр типа\")\r\n        else:\r\n            results.append(f\"Не удалось добавить параметр '{paramName}'\")\r\n\r\n    TransactionManager.Instance.TransactionTaskDone()\r\nexcept Exception as e:\r\n    TransactionManager.Instance.TransactionTaskDone()\r\n    results.append(f\"Ошибка при добавлении параметров: {str(e)}\")\r\n\r\n\r\nresults\r\n",
+      "Engine": "CPython3",
+      "VariableInputPorts": true,
+      "Id": "685cc5755e0b4c2c865f19a02122be58",
+      "Inputs": [
+        {
+          "Id": "a765c74fc16c4c898e8093f7570b12b1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c1f4dacd49c345e4b21c0d0b77ede4d9",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "0bd8057d0f774a3e9400c787a3c6000f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "770bc1de12564514bd7ac2959aec8e94",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c1f4dacd49c345e4b21c0d0b77ede4d9",
+      "End": "c7ce8704e2d846c88dd62601707e7ae5",
+      "Id": "1c4c750318f24506ac25cccb371844fc"
+    },
+    {
+      "Start": "770bc1de12564514bd7ac2959aec8e94",
+      "End": "a765c74fc16c4c898e8093f7570b12b1",
+      "Id": "f5b56555f222440fbc6b8c70534249c6"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "6d5374018c504940adf7be97896a4da7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1510.4,
+        "Y": 415.20000000000016
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "685cc5755e0b4c2c865f19a02122be58",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1012.8000000000004,
+        "Y": 437.60000000000014
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "0bd8057d0f774a3e9400c787a3c6000f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 606.40000000000009,
+        "Y": 437.6
+      }
+    ],
+    "Annotations": [],
+    "X": -1024.2543736304865,
+    "Y": -112.38998598854448,
+    "Zoom": 1.2198072017254971
+  }
+}

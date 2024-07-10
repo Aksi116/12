@@ -1,0 +1,245 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Высотная отметка ВК rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\ngroups = doc.Settings.Categories\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n#The inputs to this node will be stored as a list in the IN variable.\n\n\ndef FZL(mas):\n\tzeroLevel = \"\"\n\tfor level1 in mas:\n\t\tif level1.GetParameters('Фасад')[0].AsDouble() == 0:\n\t\t\tzeroLevel = level1\n\t\t\tbreak\n\treturn zeroLevel\n\t\t\t\n#________________________________________________________________________\npipe_f\t\t= ElementCategoryFilter(BuiltInCategory.OST_PipeCurves)\npipeIsole_f\t= ElementCategoryFilter(BuiltInCategory.OST_PipeInsulations)\nflexPipe_f\t= ElementCategoryFilter(BuiltInCategory.OST_FlexPipeCurves)\n\nline_filter_mas=[]\nline_filter_mas.append(pipe_f)\nline_filter_mas.append(pipeIsole_f)\nline_filter_mas.append(flexPipe_f)\n#________________________________________________________________________\n\npipeFitting_f\t\t\t= ElementCategoryFilter(BuiltInCategory.OST_PipeFitting)\nmechanicalEquipment_f\t= ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\npipeaccs_f\t\t\t\t= ElementCategoryFilter(BuiltInCategory.OST_PipeAccessory)\nPlumbingFixtures_f\t\t= ElementCategoryFilter(BuiltInCategory.OST_PlumbingFixtures)\n\nline_filter_mas2=[]\n\nline_filter_mas2.append(pipeFitting_f)\nline_filter_mas2.append(mechanicalEquipment_f)\nline_filter_mas2.append(pipeaccs_f)\nline_filter_mas2.append(PlumbingFixtures_f)\n#________________________________________________________________________\n\nmechlEquip_f=ElementCategoryFilter(BuiltInCategory.OST_MechanicalEquipment)\nsantech_f=ElementCategoryFilter(BuiltInCategory.OST_PlumbingFixtures)\nsprinklers_f=ElementCategoryFilter(BuiltInCategory.OST_Sprinklers)\n\nline_filter_mas3=[]\nline_filter_mas3.append(mechlEquip_f)\nline_filter_mas3.append(santech_f)\nline_filter_mas3.append(sprinklers_f)\n\n#________________________________________________________________________\n#---------------------------------\n\n#categoriesSTR = UnwrapElement(IN[1])\n\n#--------------------------------\n\ncollector = Autodesk.Revit.DB.FilteredElementCollector(doc)\nlevelfilter = ElementCategoryFilter(BuiltInCategory.OST_Levels)\nmas=collector.WherePasses(levelfilter).WhereElementIsNotElementType().ToElements()\n\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nbag=[]\nlevelMas0=[]\nlinemas01=[]\nlinemas0=[]\nbasaLevelId = FZL(mas).Id\n\nfor filter in line_filter_mas:\n\tcollector = FilteredElementCollector(doc)\n\tlineMas0=collector.WherePasses(filter).WhereElementIsNotElementType().ToElements()\n\tfor i in lineMas0:\n\t\ttry:\n\t\t\ti.GetParameters('Базовый уровень')[0].Set(basaLevelId)\n\t\texcept:\n\t\t\tpass\n\nfor filter in line_filter_mas2:\n\tcollector = FilteredElementCollector(doc)\n\tfor i in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():\n\t\ttry:\n\t\t\ti.GetParameters('Уровень')[1].Set(basaLevelId)\n\t\texcept:\n\t\t\tpass\n\t\t\t\nmastest = []\t\t\nfor filter in line_filter_mas3:\n\tcollector = FilteredElementCollector(doc)\n\tfor i in collector.WherePasses(filter).WhereElementIsNotElementType().ToElements():\n\t\ttry:\n\t\t\tHight = int(i.LookupParameter('Отметка от уровня').AsValueString())/304.8\n\t\t\tLocZ = i.Location.Point.Z \n\t\t\t\n\t\t\ti.GetParameters('Уровень')[1].Set(basaLevelId)\n\t\t\tmastest.append([Hight, LocZ,i.Id])\n\t\t\ti.LookupParameter('Отметка от уровня').Set(LocZ)\n\t\texcept:\n\t\t\tpass\n\nTransactionManager.Instance.TransactionTaskDone()\n\n\nOUT = mastest",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "6195822564fe40d2a21d1c728e6341a8",
+      "Inputs": [
+        {
+          "Id": "9cada214ccfe4fda8e1a9fd8ec850649",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c8671b260e7a44a5b20e6681f9870042",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bf5030d09b014d48afa9ee8b3cfd7204",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c50379df4ee548769bed87b092570b8f",
+      "Inputs": [
+        {
+          "Id": "825e69dec1a84c63848bc7ccee9effce",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00bcc74a35324b71b532dc74e736fa79",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c8671b260e7a44a5b20e6681f9870042",
+      "End": "825e69dec1a84c63848bc7ccee9effce",
+      "Id": "d4a5ea46a106432ba88173cee84a2984"
+    },
+    {
+      "Start": "bf5030d09b014d48afa9ee8b3cfd7204",
+      "End": "9cada214ccfe4fda8e1a9fd8ec850649",
+      "Id": "64ee32da0c464891aa40ca2ffb94564b"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6195822564fe40d2a21d1c728e6341a8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 309.19197428845916,
+        "Y": 141.09860702231833
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "9c900a0760cd47d3834a885e8174fc9f",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 169.39171640462712,
+        "Y": -68.654181927313175
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "c50379df4ee548769bed87b092570b8f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 614.04309279516553,
+        "Y": 32.532207314546838
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "882940ea3152438db957abcbd3f3aec1",
+        "Title": "Штамп",
+        "Nodes": [
+          "576a7120f9b74dd8bf5f8ce827e1f413",
+          "12e10b1df2c74472a55e4633c3945edf"
+        ],
+        "Left": -148.18498092623008,
+        "Top": -274.84944671851053,
+        "Width": 605.91614116248093,
+        "Height": 174.0,
+        "FontSize": 36.0,
+        "InitialTop": -221.84944671851053,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "576a7120f9b74dd8bf5f8ce827e1f413",
+        "Title": "Скрипт предназначен для установки всем элементам ВК уровень 1 этажа (для Собяниной Н.П.)",
+        "Nodes": [],
+        "Left": 166.73116023625084,
+        "Top": -218.12545307562345,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "12e10b1df2c74472a55e4633c3945edf",
+        "Title": "Script Name: Высотная отметка rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/27 09:54",
+        "Nodes": [],
+        "Left": -138.18498092623008,
+        "Top": -221.84944671851053,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 531.45780729750845,
+    "Y": 681.86024413265193,
+    "Zoom": 1.8727314036766673
+  }
+}

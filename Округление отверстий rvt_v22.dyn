@@ -1,0 +1,239 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Округление отверстий rvt_v22",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\nfrom System.Collections.Generic import *\n\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\nfrom Autodesk.Revit.DB.Analysis import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n\n#groups = doc.Settings.Categories\n\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n#The inputs to this node will be stored as a list in the IN variable.\n\n\n\n\t\t\t\n#________________________________________________________________________\n\n#________________________________________________________________________\n#---------------------------------\n\n#categoriesSTR = UnwrapElement(IN[1])\n\n#-------------------------------- .LookupParameter(parametrName).Set(str(pr)) .GetParameters(valueFromElement)[0].AsString()\n\ncollector = FilteredElementCollector(doc) \nGeneric_F = ElementCategoryFilter(BuiltInCategory.OST_GenericModel)\ngeneric=collector.WherePasses(Generic_F).WhereElementIsNotElementType().ToElements()\n\ntestx = []\ntesty = []\n\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nfor g in generic:\n\ttry:\n\t\tif g.LookupParameter('ST45_Дисциплина').AsString() != 0:\n\n\t\t\t#x = ((g.LookupParameter('X').AsDouble()*304.8) + 5)\n\t\t\t#testx.append(x/304.8)\n\t\t\t\n\t\t\t#x = g.LookupParameter('X').AsDouble()*304.8+5\n\t\t\tx = (int(g.LookupParameter('X').AsDouble()*304.8) + 105)/304.8\n\t\t\ty = (int(g.LookupParameter('Y').AsDouble()*304.8) + 105)/304.8\n\t\t\t\n\t\t\tg.LookupParameter('X').Set(x)\n\t\t\tg.LookupParameter('Y').Set(y)\n\t\t\t#test.append(g.LookupParameter('Z'))\n\texcept:\n\t\tpass\n\t\t\nTransactionManager.Instance.ForceCloseTransaction()\n\n\n\n\nOUT = testx\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "6195822564fe40d2a21d1c728e6341a8",
+      "Inputs": [
+        {
+          "Id": "9cada214ccfe4fda8e1a9fd8ec850649",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c8671b260e7a44a5b20e6681f9870042",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария Python."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "9c900a0760cd47d3834a885e8174fc9f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bf5030d09b014d48afa9ee8b3cfd7204",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c50379df4ee548769bed87b092570b8f",
+      "Inputs": [
+        {
+          "Id": "825e69dec1a84c63848bc7ccee9effce",
+          "Name": "",
+          "Description": "Узел для оценки.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00bcc74a35324b71b532dc74e736fa79",
+          "Name": "",
+          "Description": "Просмотр содержимого.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Визуализация выходных данных узла"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c8671b260e7a44a5b20e6681f9870042",
+      "End": "825e69dec1a84c63848bc7ccee9effce",
+      "Id": "d4a5ea46a106432ba88173cee84a2984"
+    },
+    {
+      "Start": "bf5030d09b014d48afa9ee8b3cfd7204",
+      "End": "9cada214ccfe4fda8e1a9fd8ec850649",
+      "Id": "64ee32da0c464891aa40ca2ffb94564b"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Нет",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6195822564fe40d2a21d1c728e6341a8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 309.19197428845916,
+        "Y": 141.09860702231833
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "9c900a0760cd47d3834a885e8174fc9f",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -55.328832440157157,
+        "Y": -70.558593358201165
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "c50379df4ee548769bed87b092570b8f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 614.04309279516553,
+        "Y": 32.532207314546838
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "829276bbe8484f0ba157e0a5838b0f7b",
+        "Title": "Штамп",
+        "Nodes": [
+          "f67ee92ae1804754819f2e850ade14a8",
+          "01df5ea5df6b4a75bbc2720a9eb6d84f"
+        ],
+        "Left": 31.125074545991538,
+        "Top": -316.9979769270704,
+        "Width": 600.91614116248093,
+        "Height": 174.6,
+        "FontSize": 36.0,
+        "InitialTop": -263.79797692707041,
+        "InitialHeight": 148.72399364288708,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "f67ee92ae1804754819f2e850ade14a8",
+        "Title": "Скрипт предназначен для изменения размера отверстий",
+        "Nodes": [],
+        "Left": 346.04121570847246,
+        "Top": -260.07398328418333,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "01df5ea5df6b4a75bbc2720a9eb6d84f",
+        "Title": "Script Name: Округление отверстий rvt_v22\n\nPackages used in this script: \n\n\nTimeStamp : 2024/2/27 09:52",
+        "Nodes": [],
+        "Left": 41.125074545991538,
+        "Top": -263.79797692707041,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 313.64218673811189,
+    "Y": 705.31300093852167,
+    "Zoom": 1.8305127910754271
+  }
+}
